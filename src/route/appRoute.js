@@ -1,12 +1,30 @@
 const express = require('express');
-const AppController = require('../controllers/AppController'); 
+const AppController = require('../controllers/AppController');
+const ApiService = require('../service/ApiService');
 
 const router = express.Router();
 const appController = new AppController();
+const apiService = new ApiService();
 
 // api routes
 
 router.get('/org/:country_code/whatnow', async (req, res) => {
+
+    const result = await apiService.getApis();
+    const apiList = result.response.data;
+    const reqApi = req.headers['x-api-key'];
+
+    if (reqApi) {
+        const api = apiList.find(api => api.uuid === reqApi);
+        if (!api) {
+            return res.status(404).send({ message: 'API key is not found.', status: 'error' });
+        } else {
+            await apiService.updateApi({ hits: api.hits + 1 }, api.uuid);
+        }
+    } else {
+        return res.status(404).send({ message: 'API key is not provided.', status: 'error' });
+    }
+
     const countryCode = req.params.country_code;
     const eventTypes = req.query.eventType.split(',');
 
