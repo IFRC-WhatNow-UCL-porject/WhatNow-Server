@@ -1,0 +1,59 @@
+The Global Disaster Preparedness Center WhatNow Service Application Program Interface (the “API”) is made available to you by The American National Red Cross (“Red Cross”). The API requires a registration key.  During the registration process, you must agree to the following terms and conditions, together with the terms and conditions in the Red Cross Web Site Terms of Service Agreement available at http://www.redcross.org/terms-and-conditions (collectively, the “API Terms”).  The API Terms will govern your use of the API and the downloadable electronic materials made available through the API.  Click here to register.
+
+The API is a tool that allows you (“You”) to retrieve and use data feeds made available by Red Cross including a feed of global weather and disaster event warning and watch notices (“Event Alerts”) and a feed of actionable and contextualized messages on how to prepare to local hazards by hazard type and urgency (“Prepare, Respond, and Recover Messages”, and collectively with the Event Alerts, the “Data Feeds”). Prepare, Respond, and Recover Messages are intended to accompany Event Alerts or other warning and watch notices associated with weather and disaster event in your own application. Your use of the Data Feeds is governed by the API Terms. 
+
+License and Limitations:  You may use the Data Feeds only in association with your own application subject to the API Terms, and provided You maintain compatibility with the API, as updated from time to time. You are granted a non-exclusive, limited and revocable right to download, use, reproduce and distribute to end users of your own application (“End Users”) Event Alerts and relevant contextualized Prepare, Respond, and Recover Messages in association with the urgency setting of individual Event Alerts from the Data Feeds, subject to the API Terms. You may only use the API to facilitate non-commercial uses of the Data Feeds in accordance with the API Terms. You may not in any event use the API to facilitate commercial uses of the Data Feeds, Event Alerts and/or Prepare, Respond, and Recover Messages, including without limitation, reselling them, charging to access them, charging to redistribute them, or charging to create derivative works based on them. Red Cross and its licensors maintain all title, ownership, rights and interest in and to the API, Prepare, Respond, and Recover Messages, Event Alerts, Data Feeds and Source References (as defined below) therein. All rights not expressly granted are reserved.
+
+You are responsible for maintaining the secrecy and security of the registration key provided by Red Cross to You. You are responsible for maintaining compatibility with the API, as updated from time to time, in order to continue to receive the Data Feeds. Red Cross may release updated versions of the API and Data Feeds at its sole discretion. New versions may not be compatible with previous implementations, and You agree to use the most recently updated version of the Data Feeds at all times.
+
+You agree not to modify, distribute, decompile, disassemble, or reverse engineer any portion of the API or any software of Red Cross.
+
+You may not use the API or Data Feeds in a manner that exceeds reasonable request volume or constitutes excessive or abusive usage, as determined by Red Cross at its sole discretion.
+
+You may not use the API or Data Feeds in a manner that is unlawful, misleading, negligent, malicious, intending to cause harm, or that harms Red Cross, its service providers, its content providers, or any other person, as determined by Red Cross at its sole discretion. 
+
+Red Cross may monitor your use of the API and Data Feeds. You may not use any technical means to interfere with such monitoring, and Red Cross may use technical means to overcome any such interference.
+
+Use of Prepare, Respond, and Recover Messages shall be presented only as current or updated to the then-current urgency setting of the correlated Event Alert, and you shall update individual Prepare, Respond, and Recover Messages upon any update of the Data Feeds and/or correlated Event Alerts by Red Cross.
+
+Individual Prepare, Respond, and Recover Messages You use shall be associated only with the geographic region for which it is issued. If a Prepare, Respond, and Recover Messages includes a reference to a source such as American Red Cross or another Red Cross or Red Crescent national society or organization (each a “Source Reference”), You shall include the Source Reference associated with each Prepare, Respond, and Recover Messages in the form provided in the Data Feeds. You shall make no further use of any Source Reference.
+
+You may not translate the Data Feeds, Event Alerts, and/or Prepare, Respond, and Recover Messages into any other language, make any use, edits or revisions, or alter(s) the meaning of the Data Feed, Event Alerts and/or Prepare, Respond, and Recover Messages. 
+
+You must ensure that the Data Feeds, remain in your sole possession and/or control.
+
+You may not permit Event Alerts and Prepare, Respond, and Recover Messages delivered to End Users to incorporate any advertising or sponsorship.
+
+You may not make any archive of the Data Feeds in whole or in part.
+
+Prohibited Activities and Conduct:  You and your End Users or agents shall not use the API or Data Feeds in the following ways:
+
+•	To interfere with or disrupt Red Cross services or servers.
+
+•	To circumvent or modify any keys or security mechanisms employed by Red Cross or the API, including without limitation any authentication technologies.
+
+•	To request, collect, solicit or otherwise obtain access to sign-in names, passwords or other authentication credentials for Red Cross other than what is provided to You for your own account.
+
+•	To state or imply affiliation, sponsorship or endorsement by Red Cross or any other Red Cross or Red Crescent national society or organization.
+
+•	To state or imply that You own or created the API, Data Feeds, Event Alerts and/or Prepare, Respond, and Recover Messages.
+
+•	To transmit any viruses, worms defects, Trojan horses, or any items of a destructive nature.
+
+The API and Data Feeds are provided on an "as is" and "as available" basis. Red Cross makes no representations or warranties of any kind, express or implied. Red Cross disclaims all warranties, express or implied, including but not limited to implied warranties of merchantability and fitness for a particular purpose. Red Cross and its employees, officers, governors and agents will not be liable for damages of any kind arising from the use of the API, Data Feeds, Event Alerts, and/or Prepare, Respond, and Recover Messages including but not limited to direct, indirect, incidental, punitive and consequential damages.
+
+Red Cross does not guarantee the sequence, accuracy, authenticity or completeness of the API, Data Feed, Event Alert and/or Prepare, Respond, and Recover Messages and shall not be held liable in any way to You or your End Users or any third party, including without limitation, for any delays, inaccuracies, errors or omissions, in respect of the API, Data Feed, Event Alert and/or Prepare, Respond, and Recover Messages provided hereunder.
+
+Red Cross reserves the right to alter and/or no longer provide the API and Data Feeds in whole or in part, either temporarily or permanently, at any time without prior notice. For avoidance of doubt, nothing herein obligates Red Cross to make its API or Data Feeds available to You, and You agrees and acknowledges that any access to is within the sole and absolute discretion of Red Cross.
+
+Suspension or Termination:  Red Cross reserves the right to suspend or terminate your access if Red Cross determines, in its sole discretion, that You are engaged in unauthorized use of the API or Data Feed as outlined in the API Terms or that You are using the API or Data Feed in any activity that threatens/compromises the safety and/or security of any person or the Red Cross networks.
+
+Privacy Policy: You understand, acknowledge, and agree that the operation of certain programs, services, tools, purchase options, materials, or information in the API requires the submission, use and dissemination of various personal identifying information. Accordingly, if You wish to access and use the API, You acknowledge and agree that Your use of the API will constitute acceptance of the personal identifying information collection and use practices contained in the privacy policy posted: https://www.preparecenter.org/content/privacy-policy
+
+Severability and Waiver: The invalidity of any term or provision of the API Terms will not affect the validity of any other provision. 
+
+Applicable Law: The laws of the District of Columbia shall govern all rights and obligations under this Agreement, without giving effect to any principles of conflicts of laws.
+
+Entire Agreement: The API Terms constitutes the complete and exclusive agreement between Red Cross and You with respect to the subject matter hereof and supersedes all prior oral or written understandings, communications, or agreements not specifically incorporated herein. Red Cross reserves the right to modify or revoke this agreement at any time.
+
+Please contact Red Cross at Jessica.Robbins@redcross.org with any questions regarding the API.
