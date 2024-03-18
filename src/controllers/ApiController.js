@@ -71,6 +71,18 @@ class ApiController {
             res.status(httpStatus.BAD_GATEWAY).send(e);
         }
     };
+
+    getApisByUserId = async (req, res) => {
+        try {
+            const result = await this.apiService.getApisByUserId(req.body.user_id);
+            const response = result.response;
+
+            res.status(response.code).send(response);
+        } catch (e) {
+            logger.error(e);
+            res.status(httpStatus.BAD_GATEWAY).send(e);
+        }
+    };
 }
 
 module.exports = ApiController;

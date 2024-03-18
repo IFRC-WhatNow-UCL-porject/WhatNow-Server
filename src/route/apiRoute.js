@@ -12,6 +12,8 @@ const apiValidator = new ApiValidator();
 
 router.post('/get_apis', auth(), apiController.getAllApis);
 
+router.post('/get_apis_by_user_id', auth(), apiValidator.getApisByUserIdValidator, apiController.getApisByUserId);
+
 router.post('/get_api_by_id', auth(), apiValidator.getApiByIdValidator, apiController.getApiById);
 
 router.post('/add_api', auth(), apiValidator.addApiValidator, apiController.addApi);

@@ -104,6 +104,17 @@ class ApiService {
         }
     };
 
+    getApisByUserId = async (user_id) => {
+        try {
+            var apis = await this.apiDao.findAllByWhere({user_id});
+            apis = apis.map(api => api.toJSON());
+            return responseHandler.returnSuccess(httpStatus.OK, 'fetch apis by user id successfully', apis);
+        } catch (e) {
+            logger.error(e);
+            return e;
+        }
+    }
+
 }
 
 module.exports = ApiService;
