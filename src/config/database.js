@@ -22,8 +22,8 @@ module.exports = {
         dialectOptions: {
             bigNumberStrings: true,
         },
-        ssl: true,
-        dialectOptions: { ssl: { require: true } }
+        // ssl: true,
+        // dialectOptions: { ssl: { require: true } }
     },
     production: {
         username: config.dbUser,
@@ -35,7 +35,7 @@ module.exports = {
         dialectOptions: {
             bigNumberStrings: true,
         },
-        ssl: true,
-        dialectOptions: { ssl: { require: true } }
+        // ssl: true,
+        // dialectOptions: { ssl: { require: true } }
     },
 };
