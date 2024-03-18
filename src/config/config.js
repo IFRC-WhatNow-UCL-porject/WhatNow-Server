@@ -12,6 +12,10 @@ const envValidation = Joi.object()
         DB_USER: Joi.string().required(),
         DB_PASS: Joi.string().required(),
         DB_NAME: Joi.string().required(),
+        PRODUCTION_DB_HOST: Joi.string().required(),
+        PRODUCTION_DB_USER: Joi.string().required(),
+        PRODUCTION_DB_PASS: Joi.string().required(),
+        PRODUCTION_DB_NAME: Joi.string().required(),
         JWT_SECRET: Joi.string().required().description('JWT secret key'),
         JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
             .default(30)
@@ -43,6 +47,10 @@ module.exports = {
     dbUser: envVar.DB_USER,
     dbPass: envVar.DB_PASS,
     dbName: envVar.DB_NAME,
+    productionDbHost: envVar.PRODUCTION_DB_HOST,
+    productionDbUser: envVar.PRODUCTION_DB_USER,
+    productionDbPass: envVar.PRODUCTION_DB_PASS,
+    productionDbName: envVar.PRODUCTION_DB_NAME,
     jwt: {
         secret: envVar.JWT_SECRET,
         accessExpirationMinutes: envVar.JWT_ACCESS_EXPIRATION_MINUTES,

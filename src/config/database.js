@@ -26,11 +26,10 @@ module.exports = {
         // dialectOptions: { ssl: { require: true } }
     },
     production: {
-        username: config.dbUser,
-        password: config.dbPass,
-        database: config.dbName,
-        host: config.dbHost,
-        port: config.port,
+        username: config.productionDbHost,
+        password: config.productionDbPass,
+        database: config.productionDbName,
+        host: config.productionDbHost,
         dialect: 'mysql',
         dialectOptions: {
             bigNumberStrings: true,
