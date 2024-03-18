@@ -110,8 +110,6 @@ const action = {
     CREATE: 'Created Content',
     UPDATE: 'Updated Content',
     DELETE: 'Deleted Content',
-    IMPORT: 'Updated content via import',
-    PUBLISH: 'Published a content translation'
 }
 const industry_type = {
     PROFIT: 'Profit',
