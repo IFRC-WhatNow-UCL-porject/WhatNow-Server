@@ -1,10 +1,10 @@
 const express = require('express');
 const UserValidator = require('../validator/UserValidator');
-const AuthController = require('../controllers/authController');
+const AuthController = require('../controllers/AuthController');
 const SocietyValidator = require('../validator/SocietyValidator');
-const SocietyController = require('../controllers/societyController');
+const SocietyController = require('../controllers/SocietyController');
 const UserRoleValidator = require('../validator/UserRoleValidator');
-const UserRoleController = require('../controllers/userRoleController');
+const UserRoleController = require('../controllers/UserRoleController');
 
 const router = express.Router();
 const auth = require('../middlewares/profileRouteAuth');

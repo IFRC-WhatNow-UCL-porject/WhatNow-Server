@@ -1,6 +1,6 @@
 const express = require('express');
-const TermValidator = require('../validator/termValidator');
-const TermController = require('../controllers/termController');
+const TermValidator = require('../validator/TermValidator');
+const TermController = require('../controllers/TermController');
 
 const router = express.Router();
 const auth = require('../middlewares/termRouteAuth');
