@@ -1,14 +1,14 @@
 {
-  "name": "WhatNow",
+  "name": "preparecenter",
   "version": "1.0.0",
-  "description": "New WhatNow For IFRC API",
+  "description": "New preparecenter For WhatNow IFRC API",
   "main": "src/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "start": "cross-env NODE_ENV=production node src/index.js",
     "test": "mocha './specs/**/*.spec.js' --watch"
   },
-  "author": "Kazi Naimul Hoque (Aoyan)",
+  "author": "UCL Project",
   "license": "MIT",
   "private": true,
   "dependencies": {
