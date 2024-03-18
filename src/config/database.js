@@ -26,7 +26,7 @@ module.exports = {
         // dialectOptions: { ssl: { require: true } }
     },
     production: {
-        username: config.productionDbHost,
+        username: config.productionDbUser,
         password: config.productionDbPass,
         database: config.productionDbName,
         host: config.productionDbHost,
