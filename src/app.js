@@ -41,14 +41,13 @@ app.use(errorHandler);
 
 const db = require('./models');
 
-// // Uncomment this line if you want to sync database model
-// db.sequelize.sync()
-//     .then(() => {
-//         console.log('Database connected');
-//         seeder();
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
+db.sequelize.sync()
+    .then(() => {
+        console.log('Database connected');
+        seeder();
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 module.exports = app;
