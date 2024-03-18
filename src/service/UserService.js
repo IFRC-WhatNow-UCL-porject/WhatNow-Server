@@ -211,7 +211,7 @@ class UserService {
     oauthCheckEmailExist = async (email) => {
         try {
             if (await this.userDao.isEmailExists(email)) {
-                const data = await this.userDao.findByEmail(email);
+                var data = await this.userDao.findByEmail(email);
                 if (data.status === userConstant.STATUS_INACTIVE) {
                     return responseHandler.returnError(httpStatus.BAD_REQUEST, 'User is Inactive!');
                 }
