@@ -219,6 +219,10 @@ class UserService {
                     return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email not verified!');
                 }
                 const tokens = await this.tokenService.generateAuthTokens(data, tokenTypes.ACCESS);
+                
+                data = data.toJSON();
+                delete data.password;
+                
                 return responseHandler.returnSuccess(httpStatus.OK, 'Email is found!', { exist: true, data, tokens});
             }
             return responseHandler.returnSuccess(httpStatus.OK, 'Email not found!', { exist: false });
