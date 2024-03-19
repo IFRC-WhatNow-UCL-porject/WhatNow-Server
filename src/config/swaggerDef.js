@@ -6,7 +6,7 @@ module.exports = {
     info: {
       title: 'OpenAPI documentation',
       version: '1.0.0',
-      description: 'API description',
+      description: 'Base route: /api',
     },
     servers: [
       {
