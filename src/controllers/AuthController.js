@@ -301,9 +301,9 @@ class AuthController {
             if (!response.status) {
                 res.status(response.code).send(response);
             } else {
-                const data = await this.tokenService.getUserIdFromToken(req.body.token, req.body.type);
-                const res = await this.userService.updateUserById({ email_verified: userConstant.EMAIL_VERIFIED_TRUE }, data.user_uuid);
-                res.status(res.statusCode).send(res.response);
+                const resToken = await this.tokenService.getUserIdFromToken(req.body.token, req.body.type);
+                const resData = await this.userService.updateUserById({ email_verified: userConstant.EMAIL_VERIFIED_TRUE }, resToken.response.data.user_uuid);
+                res.status(resData.statusCode).send(resData.response);
             }
         } catch (e) {
             logger.error(e);
