@@ -61,7 +61,7 @@ class AuthService {
                 blacklisted: false,
             });
 
-            return responseHandler.returnSuccess(httpStatus.OK, "logout successfully", { toekn: access_token });
+            return responseHandler.returnSuccess(httpStatus.OK, "logout successfully", { token: access_token });
         } catch (e) {
             logger.error(e);
             return responseHandler.returnError(httpStatus.BAD_GATEWAY, 'Logout Error');

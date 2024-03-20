@@ -24,11 +24,12 @@ class ApiUserService {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already taken');
             }
             const uuid = uuidv4();
-            const splitedData = await this.splitData(apiUserBody, uuid, isCreate = true);
-            this.splitData.user = {
+            var splitedData = await this.splitData(apiUserBody, uuid, true);
+            splitedData.user = {
                 ...splitedData.user,
-                password: bcrypt.hashSync(apiUserBody.password, 8),
+                password: bcrypt.hashSync(apiUserBody.password, 10),
             }
+            console.log(splitedData);
             let userData = await this.userDao.create(splitedData.user);
             let userRoleData = await this.userRoleDao.create(splitedData.userRole);
             let userSocietyData = await this.userSocietyDao.create(splitedData.userSociety);
@@ -45,7 +46,7 @@ class ApiUserService {
             return responseHandler.returnSuccess(httpStatus.CREATED, message, apiUserData);
         } catch (e) {
             logger.error(e);
-            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
+            return responseHandler.returnError(httpStatus.BAD_GATEWAY, 'Something went wrong!');
         }
     };
 
@@ -93,7 +94,7 @@ class ApiUserService {
             return responseHandler.returnError(httpStatus.NOT_FOUND, 'API User Not found!');
         }
 
-        const splitedData = await this.splitData(data, uuid, isCreate = false);
+        const splitedData = await this.splitData(data, uuid, false);
         splitedData.user = {
             ...splitedData.user,
             password: user.password,
@@ -125,7 +126,7 @@ class ApiUserService {
         const deleteUserSociety = await this.userSocietyDao.deleteByWhere({ user_id: uuid });
         const deleteApiUser = await this.apiUserDao.deleteByWhere({ uuid });
 
-        if (!deleteUser || !deleteUserRole || !deleteUserSociety || !deleteApiUser) {
+        if (!deleteUser || !deleteUserRole || !deleteApiUser) {
             message = 'API User Delete Failed!';
             return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
         }
@@ -135,7 +136,7 @@ class ApiUserService {
     }
 
     splitData = async (data, uuid, isCreate) => {
-        const user = {
+        let user = {
             uuid,
             email: data.email.toLowerCase(),
             first_name: data.first_name,
@@ -144,17 +145,17 @@ class ApiUserService {
             email_verified: isCreate ? userConstant.EMAIL_VERIFIED_FALSE : userConstant.EMAIL_VERIFIED_TRUE,
         };
 
-        const userRole = {
+        let userRole = {
             user_id: uuid,
             role_id: userRoles.API_USER,
         };
 
-        const userSociety = {
+        let userSociety = {
             user_id: uuid,
             society_id: data.society_id,
         };
 
-        const apiUser = {
+        let apiUser = {
             uuid,
             location: data.location,
             organization: data.organization,

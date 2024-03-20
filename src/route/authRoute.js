@@ -37,7 +37,10 @@ const apiUserValidator = new ApiUserValidator();
  *                 required: true
  *               password:
  *                 type: string
- *                 minLength: 6
+ *                 minLength: 12
+ *                 required: true
+ *               user_role:
+ *                 type: integer
  *                 required: true
  *               first_name:
  *                 type: string
@@ -130,7 +133,7 @@ router.post('/register', userValidator.userCreateValidator, authController.regis
  *                 description: Email address of the user (required)
  *               password:
  *                 type: string
- *                 minLength: 6
+ *                 minLength: 12
  *                 description: Password of the user (required)
  *               first_name:
  *                 type: string
@@ -164,9 +167,6 @@ router.post('/register', userValidator.userCreateValidator, authController.regis
  *                 response:
  *                   type: object
  *                   properties:
- *                     status:
- *                       type: boolean
- *                       example: true
  *                     code:
  *                       type: integer
  *                       example: 201
@@ -379,8 +379,25 @@ router.post('/login', userValidator.userLoginValidator, authController.login);
  *                 type: string
  *                 description: Array of tokens to be revoked
  *     responses:
- *       '204':
- *         description: No Content
+ *       '200':
+ *         description: Logout Successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "logout successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     token:
+ *                       type: string
+ * 
  */
 router.post('/logout', authController.logout);
 
@@ -459,19 +476,6 @@ router.post('/logout', authController.logout);
  *                 message:
  *                   type: string
  *                   example: "Invalid User Role!"
- *       '401':
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: integer
- *                   example: 401
- *                 message:
- *                   type: string
- *                   example: "Unauthorized"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -553,7 +557,7 @@ router.post(
  *                   example: 400
  *                 message:
  *                   type: string
- *                   example: Invalid Email Address! / User is not active! / Email is not verified! / Wrong Password!
+ *                   example: "Wrong Password!"
  *       502:
  *         description: Bad Gateway. An error occurred while attempting to log in.
  *         content:
@@ -616,21 +620,6 @@ router.post(
  *                 message:
  *                   type: string
  *                   example: token not found / [specific JWT error message]
- *       401:
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: integer
- *                   description: The HTTP status code.
- *                   example: 401
- *                 message:
- *                   type: string
- *                   description: A brief message explaining the error.
- *                   example: "Please authenticate"
  *       502:
  *         description: Bad Gateway. An error occurred while attempting to verify the token.
  *         content:
@@ -699,7 +688,7 @@ router.post(
  *             schema:
  *               type: object
  *               properties:
- *                 statusCode:
+ *                 code:
  *                   type: integer
  *                   example: 400
  *                 message:
@@ -725,7 +714,7 @@ router.post(
  *             schema:
  *               type: object
  *               properties:
- *                 statusCode:
+ *                 code:
  *                   type: integer
  *                   example: 502
  *                 message:
@@ -767,33 +756,38 @@ router.post(
  *             schema:
  *               type: object
  *               properties:
- *                 exist:
- *                   type: boolean
- *                   description: Whether the email exists or not.
+ *                 message:
+ *                   type: string
+ *                   example: "Email is found!"
  *                 data:
  *                   type: object
  *                   properties:
- *                     id:
- *                       type: integer
- *                     email:
- *                       type: string
- *                     status:
- *                       type: string
- *                     email_verified:
+ *                     exist:
  *                       type: boolean
- *                 tokens:
- *                   type: object
- *                   properties:
- *                     access:
+ *                     data: 
  *                       type: object
  *                       properties:
- *                         token:
+ *                         id:
+ *                           type: integer
+ *                         email:
  *                           type: string
- *                         expires:
+ *                         status:
  *                           type: string
- *                         example:
- *                           token: "access-token"
- *                           expires: "2024-03-12T01:06:54.000Z"
+ *                         email_verified:
+ *                           type: boolean
+ *                     tokens:
+ *                       type: object
+ *                       properties:
+ *                         access:
+ *                           type: object
+ *                           properties:
+ *                             token:
+ *                               type: string
+ *                             expires:
+ *                               type: string
+ *                             example:
+ *                               token: "access-token"
+ *                               expires: "2024-03-12T01:06:54.000Z"
  *       400:
  *         description: Bad request. User is inactive or email not verified.
  *         content:
@@ -985,7 +979,7 @@ router.post(
  *                 type: string
  *                 minLength: 6
  *                 required: true
- *               uuid:
+ *               token:
  *                 type: string
  *                 required: true
  *     responses:
@@ -1025,35 +1019,6 @@ router.post(
  *                 message:
  *                   type: string
  *                   example: Confirm password not matched
- *       '401':
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: integer
- *                   example: 401
- *                 message:
- *                   type: string
- *                   example: "Unauthorized"
- *       '404':
- *         description: User Not found!
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: boolean
- *                   example: false
- *                 code:
- *                   type: integer
- *                   example: 404
- *                 message:
- *                   type: string
- *                   example: User Not found!
  *       '502':
  *         description: Unknown error
  *         content:
@@ -1109,19 +1074,6 @@ router.post(
  *                 message:
  *                   type: string
  *                   example: Reset password email sent successfully!
- *       400:
- *         description: Bad request. The provided email may not exist or other validation errors.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: integer
- *                   example: 400
- *                 message:
- *                   type: string
- *                   example: "Email does not exist or other error message"
  *       502:
  *         description: Server error. Unable to send reset password email due to an issue with the mail server or other backend issue.
  *         content:
@@ -1177,19 +1129,6 @@ router.post(
  *                 message:
  *                   type: string
  *                   example: Activation email sent successfully!
- *       400:
- *         description: Bad request. The provided email may not exist or other validation errors.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: integer
- *                   example: 400
- *                 message:
- *                   type: string
- *                   example: "Email does not exist or other error message"
  *       502:
  *         description: Server error. Unable to send activation email due to an issue with the mail server or other backend issue.
  *         content:

@@ -46,12 +46,12 @@ const contentValidator = new ContentValidator();
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "fetch content status success"
- *                 is_init:
+ *                 data:
  *                   type: boolean
  *                   description: Indicates whether content initialization is needed.
  *                   example: true

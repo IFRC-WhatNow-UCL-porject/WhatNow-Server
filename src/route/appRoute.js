@@ -67,9 +67,9 @@ const appController = new AppController();
  *       400:
  *         description: Bad request. 
  *         Possible reasons: missing country_code or eventType.
- *       404:
+ *       401:
  *         description: Not Found. The requested resource could not be found.
- *       500:
+ *       502:
  *         description: Internal Server Error. An error occurred on the server.
  */
 router.get('/org/:country_code/whatnow', async (req, res) => {

@@ -5,6 +5,7 @@ const UserDao = require('../dao/UserDao');
 const UserRoleDao = require('../dao/UserRoleDao');
 const ApiUserDao = require('../dao/ApiUserDao');
 const UserSocietyDao = require('../dao/UserSocietyDao');
+const TokenDao = require('../dao/TokenDao');
 const TokenService = require('../service/TokenService');
 const responseHandler = require('../utils/responseHandler');
 const logger = require('../config/logger');
@@ -19,6 +20,7 @@ class UserService {
         this.apiUserDao = new ApiUserDao();
         this.tokenService = new TokenService();
         this.userSocietyDao = new UserSocietyDao();
+        this.tokenDao = new TokenDao();
     }
 
     createUser = async (userBody) => {
@@ -148,8 +150,9 @@ class UserService {
 
     setUserTermsVersion = async (terms_version, user_id) => {
         try {
-            const updateUser = await this.userDao.updateWhere({ terms_version }, { uuid: user_id });
-            if (updateUser) {
+            const [updateUser] = await this.userDao.updateWhere({ terms_version }, { uuid: user_id });
+            console.log('updateUser', updateUser);
+            if (updateUser > 0) {
                 return responseHandler.returnSuccess(
                     httpStatus.OK,
                     'Terms version updated Successfully!',
@@ -319,7 +322,9 @@ class UserService {
 
     resetPassword = async (token, password) => {
         try {
-            const data = await this.toeknDao.findOneByWhere({ token: token });
+            console.log('token', token);
+            console.log('password', password);
+            const data = await this.tokenDao.findOneByWhere({ token: token });
             if (!data) {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Invalid Token!');
             }
