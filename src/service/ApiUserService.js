@@ -24,7 +24,8 @@ class ApiUserService {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already taken');
             }
             const uuid = uuidv4();
-            const splitedData = await this.splitData(apiUserBody, uuid, isCreate = true);
+            const isCreate = true;
+            const splitedData = await this.splitData(apiUserBody, uuid, isCreate);
             this.splitData.user = {
                 ...splitedData.user,
                 password: bcrypt.hashSync(apiUserBody.password, 8),
@@ -93,7 +94,8 @@ class ApiUserService {
             return responseHandler.returnError(httpStatus.NOT_FOUND, 'API User Not found!');
         }
 
-        const splitedData = await this.splitData(data, uuid, isCreate = false);
+        const isCreate = true;
+        const splitedData = await this.splitData(data, uuid, isCreate);
         splitedData.user = {
             ...splitedData.user,
             password: user.password,
