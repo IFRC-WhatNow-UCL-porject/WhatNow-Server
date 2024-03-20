@@ -10,7 +10,8 @@ const responseHandler = require('../utils/responseHandler');
 const logger = require('../config/logger');
 const { userConstant, userRoles } = require('../config/constant');
 const { tokenTypes } = require('../config/tokens');
-
+const path = require('path');
+const fs = require('fs');
 
 class UserService {
     constructor() {
@@ -346,6 +347,24 @@ class UserService {
         } catch (e) {
             logger.error(e);
             return responseHandler.returnError(httpStatus.BAD_GATEWAY, 'reset password failed!');
+        }
+    }
+
+    updateTermAgree = async (uuid) => {
+        try {
+            const termsFolderPath = path.join(__dirname, '../config/terms');
+            const versionFilePath = path.join(termsFolderPath, 'version.txt');
+            const versionFileContent = fs.readFileSync(versionFilePath, 'utf8');
+            const versionFileContentArray = versionFileContent.split('\n');
+            const latestVersion = versionFileContentArray[versionFileContentArray.length - 1].split(' - ')[0];
+            const updateUser = await this.userDao.updateWhere({ terms_version: latestVersion }, { uuid });
+            if (updateUser) {
+                return responseHandler.returnSuccess(httpStatus.OK, 'Terms version updated Successfully!', {});
+            }
+            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Terms version Update Failed!');
+        } catch (e) {
+            logger.error(e);
+            return responseHandler.returnError(httpStatus.BAD_GATEWAY, 'update term agree failed!');
         }
     }
 }

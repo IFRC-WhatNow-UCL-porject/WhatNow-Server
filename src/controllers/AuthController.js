@@ -321,6 +321,17 @@ class AuthController {
             res.status(httpStatus.BAD_GATEWAY).send(e);
         }
     }
+
+    updateTermAgree = async (req, res) => {
+        try {
+            const result = await this.userService.updateTermAgree(req.body.uuid);
+
+            res.status(result.statusCode).send(result.response);
+        } catch (e) {
+            logger.error(e);
+            res.status(httpStatus.BAD_GATEWAY).send(e);
+        }
+    }
 }
 
 module.exports = AuthController;

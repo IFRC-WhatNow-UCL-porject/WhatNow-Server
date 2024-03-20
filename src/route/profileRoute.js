@@ -41,4 +41,6 @@ router.post('/get_user_societies', auth(), societyValidator.getUserSocietiesVali
 
 router.post('/get_user_role', auth(), userRoleValidator.getUserRoleValidator, userRoleController.getUserRole);
 
+router.post('/update_term_agree', auth(), userValidator.updateTermAgreeValidator, authController.updateTermAgree);
+
 module.exports = router;
