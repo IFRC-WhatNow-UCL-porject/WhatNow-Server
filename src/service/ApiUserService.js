@@ -79,7 +79,6 @@ class ApiUserService {
             const user = await this.userDao.findOneByWhere({ uuid: userRole.user_id });
             const userSociety = await this.userSocietyDao.findOneByWhere({ user_id: userRole.user_id });
             const apiUser = await this.apiUserDao.findOneByWhere({ uuid: userRole.user_id });
-            delete user.password;
             mergedData.push(await this.mergeData(user, userRole, userSociety, apiUser));
         }
         return responseHandler.returnSuccess(httpStatus.OK, 'API Users found!', mergedData);
