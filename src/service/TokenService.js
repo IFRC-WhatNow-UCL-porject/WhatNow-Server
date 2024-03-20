@@ -106,7 +106,7 @@ class TokenService {
         if (!tokenDoc) {
             return responseHandler.returnError(httpStatus.BAD_REQUEST, 'token not found');
         }
-        return responseHandler.returnSuccess(httpStatus.OK, 'token verified', { user_uuid: payload.sub });
+        return responseHandler.returnSuccess(httpStatus.OK, 'token verified', { });
     }
 }
 
