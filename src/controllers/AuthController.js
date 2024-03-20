@@ -217,7 +217,7 @@ class AuthController {
                 from: process.env.SMTP_USER,
                 to: req.body.email,
                 subject: 'WhatNow? - Activate your account!',
-                text: `Click link to activate: http://localhost:3000/activate/?tokenAct=${token}`,
+                text: `Click link to activate: https://whatnow-preparecenter.azurewebsites.net/activate/?tokenAct=${token}`,
             }).then(result => {
                 console.log(`success, id ${result.messageId}`);
                 res.status(httpStatus.OK).send({ status: true, code: httpStatus.OK, message: 'Activation email sent successfully!' });
@@ -259,7 +259,7 @@ class AuthController {
                 from: process.env.SMTP_USER,
                 to: req.body.email,
                 subject: 'WhatNow? - Reset your password!',
-                text: `Click link to activate: http://localhost:3000/reset/?tokenPass=${token}`,
+                text: `Click link to activate: https://whatnow-preparecenter.azurewebsites.net/reset/?tokenPass=${token}`,
             }).then(result => {
                 console.log(`success, id ${result.messageId}`);
                 res.status(httpStatus.OK).send({ status: true, code: httpStatus.OK, message: 'Reset password email sent successfully!' });
