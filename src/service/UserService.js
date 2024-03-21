@@ -184,7 +184,7 @@ class UserService {
     profileUpdate = async (userBody) => {
         try {
             const updateUser = await this.userDao.updateWhere(userBody, { uuid: userBody.uuid });
-            if (updateUser) {
+            if (updateUser[0] > 0) {
                 if (userBody.user_role) {
                     const data = {
                         user_id: userBody.uuid,

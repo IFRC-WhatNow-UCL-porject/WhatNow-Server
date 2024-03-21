@@ -15,7 +15,7 @@ describe('/api/app', () => {
             expect(response.body).toHaveProperty('attributions');
             expect(response.body).toHaveProperty('translations');
             expect(response.body).toHaveProperty('country_code', 'GB');
-            expect(response.body).toHaveProperty('society_name', 'United Kiongdom Society');
+            expect(response.body).toHaveProperty('society_name', 'United Kingdom Society');
         });
     });
 });

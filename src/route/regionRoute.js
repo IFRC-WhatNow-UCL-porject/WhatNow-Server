@@ -36,7 +36,7 @@ const regionValidator = new RegionValidator();
  *             schema:
  *               type: object
  *               properties:
- *                 statusCode:
+ *                 code:
  *                   type: integer
  *                   example: 200
  *                 response:
@@ -109,7 +109,7 @@ const regionValidator = new RegionValidator();
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -155,6 +155,9 @@ router.post('/get_region', auth(), regionValidator.regionGetValidator, regionCon
  *               description:
  *                 type: string
  *                 required: true
+ *               is_published:
+ *                 type: boolean
+ *                 required: true
  *     responses:
  *       '200':
  *         description: Region created successfully
@@ -163,7 +166,7 @@ router.post('/get_region', auth(), regionValidator.regionGetValidator, regionCon
  *             schema:
  *               type: object
  *               properties:
- *                 statusCode:
+ *                 code:
  *                   type: integer
  *                   example: 200
  *                 response:
@@ -216,12 +219,11 @@ router.post('/get_region', auth(), regionValidator.regionGetValidator, regionCon
  *               properties:
  *                 code:
  *                   type: integer
- * 
  *                   example: 400
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Language code not exist"  
+ *                   example: "Language code not found"  
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -235,7 +237,7 @@ router.post('/get_region', auth(), regionValidator.regionGetValidator, regionCon
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -299,8 +301,8 @@ router.post('/add_region', auth(), regionValidator.regionAddValidator, regionCon
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Region checked successfully"
@@ -329,7 +331,7 @@ router.post('/add_region', auth(), regionValidator.regionAddValidator, regionCon
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while checking the region.
  *         content:
@@ -378,15 +380,12 @@ router.post('/check_region', auth(), regionValidator.regionCheckValidator, regio
  *             schema:
  *               type: object
  *               properties:
- *                 statusCode:
+ *                 code:
  *                   type: integer
  *                   example: 200
  *                 response:
  *                   type: object
  *                   properties:
- *                     status:
- *                       type: boolean
- *                       example: true
  *                     code:
  *                       type: integer
  *                       example: 200
@@ -408,12 +407,11 @@ router.post('/check_region', auth(), regionValidator.regionCheckValidator, regio
  *               properties:
  *                 code:
  *                   type: integer
- * 
  *                   example: 400
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "society_id is required"  
+ *                   example: "\"uuid\" is required"  
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -426,7 +424,7 @@ router.post('/check_region', auth(), regionValidator.regionCheckValidator, regio
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -471,15 +469,12 @@ router.post('/update_region', auth(), regionValidator.regionUpdateValidator, reg
  *             schema:
  *               type: object
  *               properties:
- *                 statusCode:
+ *                 code:
  *                   type: integer
  *                   example: 200
  *                 response:
  *                   type: object
  *                   properties:
- *                     status:
- *                       type: boolean
- *                       example: true
  *                     code:
  *                       type: integer
  *                       example: 200
@@ -504,7 +499,7 @@ router.post('/update_region', auth(), regionValidator.regionUpdateValidator, reg
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "uuid is required"  
+ *                   example: "\"uuid\" is required"  
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -518,7 +513,7 @@ router.post('/update_region', auth(), regionValidator.regionUpdateValidator, reg
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:

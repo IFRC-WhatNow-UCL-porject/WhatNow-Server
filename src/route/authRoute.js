@@ -230,7 +230,7 @@ router.post('/register', userValidator.userCreateValidator, authController.regis
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -706,7 +706,7 @@ router.post(
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Bad Gateway. An error occurred while setting the user terms version.
  *         content:

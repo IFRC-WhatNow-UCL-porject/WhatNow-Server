@@ -80,30 +80,42 @@ router.post('/get_user_societies', auth(), societyValidator.getUserSocietiesVali
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   uuid:
- *                     type: string
- *                     description: Unique identifier of the society.
- *                     example: "society-uuid-5678"
- *                   society_name:
- *                     type: string
- *                     description: Name of the society.
- *                     example: "Global Health Society"
- *                   country_code:
- *                     type: string
- *                     description: Country code of the society's location.
- *                     example: "US"
- *                   url:
- *                     type: string
- *                     description: Website URL of the society.
- *                     example: "https://www.globalhealthsociety.org"
- *                   image_url:
- *                     type: string
- *                     description: URL of the society's logo or representative image.
- *                     example: "https://www.globalhealthsociety.org/logo.png"
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 status:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "get all societies successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       uuid:
+ *                         type: string
+ *                         description: Unique identifier of the society.
+ *                         example: "society-uuid-5678"
+ *                       society_name:
+ *                         type: string
+ *                         description: Name of the society.
+ *                         example: "Global Health Society"
+ *                       country_code:
+ *                         type: string
+ *                         description: Country code of the society's location.
+ *                         example: "US"
+ *                       url:
+ *                         type: string
+ *                         description: Website URL of the society.
+ *                         example: "https://www.globalhealthsociety.org"
+ *                       image_url:
+ *                         type: string
+ *                         description: URL of the society's logo or representative image.
+ *                         example: "https://www.globalhealthsociety.org/logo.png"
  *       502:
  *         description: Server error, unable to fetch the list of societies.
  *         content:

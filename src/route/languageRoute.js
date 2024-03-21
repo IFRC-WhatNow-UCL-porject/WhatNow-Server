@@ -49,7 +49,7 @@ const languageValidator = new LanguageValidator();
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "fetch language by society successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -111,7 +111,7 @@ const languageValidator = new LanguageValidator();
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -182,7 +182,7 @@ router.post('/get_language', auth(), languageValidator.languageGetValidator, lan
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "create language successfully"
  *                     data:
  *                       type: object
  *                       properties:
@@ -242,7 +242,7 @@ router.post('/get_language', auth(), languageValidator.languageGetValidator, lan
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -310,7 +310,7 @@ router.post('/add_language', auth(), languageValidator.languageAddValidator, lan
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "update language successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -344,7 +344,7 @@ router.post('/add_language', auth(), languageValidator.languageAddValidator, lan
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:

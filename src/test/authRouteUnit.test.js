@@ -29,6 +29,36 @@ jest.mock('nodemailer', () => ({
 }));
 
 describe('/api/auth', () => {
+
+    afterAll(async () => {
+        const user = await userDao.findByWhere({ email: 'testapiuser@example.com'});
+        
+        const user2 = await userDao.findByWhere({ email: 'test@example.com'});
+
+        const user_id = user2[0].dataValues.uuid;
+
+        const uuid = user[0].dataValues.uuid;
+        
+        console.log('uuid:', uuid);
+        console.log('user_id:', user_id);
+
+        await apiUserDao.deleteByWhere({ uuid: uuid });
+
+        await userRoleDao.deleteByWhere({ user_id: uuid });
+
+        await userRoleDao.deleteByWhere({ user_id: user_id });
+
+        await userDao.deleteByWhere({email: 'testapiuser@example.com'
+        });
+
+        await userDao.deleteByWhere({ email: 'test@example.com' });
+
+        await tokenDao.deleteByWhere({ user_uuid: uuid });
+
+        await tokenDao.deleteByWhere({ user_uuid: user_id });
+
+    });
+
     describe('POST /register', () => {
         test('Successfully register a user', async () => {
             const userData = {
@@ -195,7 +225,7 @@ describe('/api/auth', () => {
                 .expect(200);
             console.log('Response:', response.body);
             expect(response.body).toHaveProperty('status', true);
-            expect(response.body).toHaveProperty('message', 'user role chekced');
+            expect(response.body).toHaveProperty('message', 'user role checked');
             expect(response.body.data).toHaveProperty('role_id', 3);
         });
 
@@ -264,7 +294,7 @@ describe('/api/auth', () => {
           expect(response.statusCode).toBe(400);
         });
       
-        test('It should respond with 401 for unauthorized access', async () => {
+        test('It should respond with 400 for unauthorized access', async () => {
           // This scenario assumes the token is missing or not provided
           const response = await request(app)
             .post('/api/auth/check_user_status')
@@ -410,33 +440,6 @@ describe('/api/auth', () => {
 
         expect(response.body.message).toContain('logout successfully');
         expect(response.body.data).toHaveProperty('token');
-
-        const user = await userDao.findByWhere({ email: 'testapiuser@example.com'});
-        
-        const user2 = await userDao.findByWhere({ email: 'test@example.com'});
-
-        const user_id = user2[0].dataValues.uuid;
-
-        const uuid = user[0].dataValues.uuid;
-        
-        console.log('uuid:', uuid);
-        console.log('user_id:', user_id);
-
-        await apiUserDao.deleteByWhere({ uuid: uuid });
-
-        await userRoleDao.deleteByWhere({ user_id: uuid });
-
-        await userRoleDao.deleteByWhere({ user_id: user_id });
-
-        await userDao.deleteByWhere({email: 'testapiuser@example.com'
-        });
-
-        await userDao.deleteByWhere({ email: 'test@example.com' });
-
-        await tokenDao.deleteByWhere({ user_uuid: uuid });
-
-        await tokenDao.deleteByWhere({ user_uuid: user_id });
-
         });
     });
 

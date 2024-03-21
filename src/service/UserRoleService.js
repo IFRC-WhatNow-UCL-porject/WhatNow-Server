@@ -19,7 +19,7 @@ class UserRoleService {
             const data = {
                 role_id: userRole.dataValues.role_id,
             }
-            return responseHandler.returnSuccess(httpStatus.OK, 'user role chekced', data);
+            return responseHandler.returnSuccess(httpStatus.OK, 'user role checked', data);
         } catch (error) {
             logger.error(error);
             return responseHandler.returnError(httpStatus.BAD_REQUEST, 'check user role error');

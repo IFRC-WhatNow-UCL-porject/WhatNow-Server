@@ -109,7 +109,7 @@ const auditLogValidator = new AuditLogValidator();
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:

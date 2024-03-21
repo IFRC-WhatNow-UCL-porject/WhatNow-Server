@@ -38,23 +38,16 @@ const regionValidator = new RegionValidator();
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Region published successfully"
  *                 data:
- *                   type: object
- *                   properties:
- *                     uuid:
- *                       type: string
- *                       example: "abcd1234"
- *                     name:
- *                       type: string
- *                       example: "Northern Region"
- *                     status:
- *                       type: string
- *                       example: "published"
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                     example: 1
  *       400:
  *         description: Region not found.
  *       401:
@@ -92,23 +85,16 @@ router.post('/publish', auth(), regionValidator.publishValidator, regionControll
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Region stop published successfully"
  *                 data:
- *                   type: object
- *                   properties:
- *                     uuid:
- *                       type: string
- *                       example: "abcd1234"
- *                     name:
- *                       type: string
- *                       example: "Northern Region"
- *                     status:
- *                       type: string
- *                       example: "unpublished"
+ *                   type: array
+ *                   items:
+ *                     type: integer
+ *                     example: 1
  *       400:
  *         description: Region not found or invalid request.
  *         content:

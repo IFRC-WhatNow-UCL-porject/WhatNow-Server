@@ -39,28 +39,37 @@ const messageValidator = new MessageValidator();
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   uuid:
- *                     type: string
- *                     description: Unique identifier for the society.
- *                     example: "123e4567-e89b-12d3-a456-426614174000"
- *                   name:
- *                     type: string
- *                     description: Name of the society.
- *                     example: "International Federation of Societies"
- *                   createdAt:
- *                     type: string
- *                     format: date-time
- *                     description: Timestamp when the society was created.
- *                     example: "2024-03-17T12:00:00Z"
- *                   updatedAt:
- *                     type: string
- *                     format: date-time
- *                     description: Timestamp when the society was last updated.
- *                     example: "2024-04-17T12:00:00Z"
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "get all societies successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       uuid:
+ *                         type: string
+ *                         description: Unique identifier for the society.
+ *                         example: "123e4567-e89b-12d3-a456-426614174000"
+ *                       name:
+ *                         type: string
+ *                         description: Name of the society.
+ *                         example: "International Federation of Societies"
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                         description: Timestamp when the society was created.
+ *                         example: "2024-03-17T12:00:00Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         description: Timestamp when the society was last updated.
+ *                         example: "2024-04-17T12:00:00Z"
  *       401:
  *         description: Unauthorized. Token not provided or invalid.
  *         content:
@@ -122,15 +131,12 @@ router.post('/get_all_societies', auth(), societyValidator.getAllSocietiesValida
  *                 response:
  *                   type: object
  *                   properties:
- *                     status:
- *                       type: boolean
- *                       example: true
  *                     code:
  *                       type: integer
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "fetch language by society successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -192,7 +198,7 @@ router.post('/get_all_societies', auth(), societyValidator.getAllSocietiesValida
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -243,8 +249,8 @@ router.post('/get_language', auth(), languageValidator.languageGetValidator, lan
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Region fetched successfully"
@@ -300,7 +306,7 @@ router.post('/get_language', auth(), languageValidator.languageGetValidator, lan
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error occurred while fetching the published regions.
  *         content:
@@ -353,8 +359,8 @@ router.post('/get_published_region', auth(), regionValidator.regionGetPublishedV
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Region content fetched successfully"
@@ -404,7 +410,7 @@ router.post('/get_published_region', auth(), regionValidator.regionGetPublishedV
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error occurred while fetching region content.
  *         content:
@@ -470,7 +476,7 @@ router.post('/get_region_content', auth(), contentValidator.regionContentGetVali
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "Messages"
+ *                       example: "fetch messages successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -523,7 +529,7 @@ router.post('/get_region_content', auth(), contentValidator.regionContentGetVali
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Unknown error
  *         content:
@@ -576,11 +582,11 @@ router.post('/get_content_message', auth(), messageValidator.messageGetValidator
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Region content fetched successfully"
+ *                   example: "get society and region name successfully"
  *                 data:
  *                   type: object
  *                   properties:

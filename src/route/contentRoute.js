@@ -49,7 +49,7 @@ const contentValidator = new ContentValidator();
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "fetch content by society successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -118,7 +118,7 @@ const contentValidator = new ContentValidator();
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -163,8 +163,8 @@ router.post('/get_content', auth(), contentValidator.contentGetValidator, conten
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "fetch content by id successfully"
@@ -182,7 +182,7 @@ router.post('/get_content', auth(), contentValidator.contentGetValidator, conten
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Error fetching content by id.
  *         content:
@@ -235,8 +235,8 @@ router.post('/get_content_by_id', auth(), contentValidator.contentGetByIdValidat
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "fetch content ids successfully"
@@ -271,7 +271,7 @@ router.post('/get_content_by_id', auth(), contentValidator.contentGetByIdValidat
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Error fetching content IDs.
  *         content:
@@ -333,7 +333,7 @@ router.post('/get_contentIds', auth(), contentValidator.contentGetIdsValidator, 
  *                       type: string
  *                 required: true
  *     responses:
- *       '200':
+ *       '201':
  *         description: success
  *         content:
  *           application/json:
@@ -351,10 +351,10 @@ router.post('/get_contentIds', auth(), contentValidator.contentGetIdsValidator, 
  *                       example: true
  *                     code:
  *                       type: integer
- *                       example: 200
+ *                       example: 201
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "Content added successfully"
  *                     data:
  *                       type: object
  *                       properties:
@@ -405,7 +405,7 @@ router.post('/get_contentIds', auth(), contentValidator.contentGetIdsValidator, 
  *                   example: 400
  *                 message:
  *                   type: string
- *                   example: "society_id is required"
+ *                   example: "\"society_id\" is require"
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -418,7 +418,7 @@ router.post('/get_contentIds', auth(), contentValidator.contentGetIdsValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -484,7 +484,7 @@ router.post('/add_content', auth(), contentValidator.contentAddValidator, conten
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "init content successfully"
+ *                       example: "Content initialized successfully"
  *                     data:
  *                       type: object
  *                       properties:
@@ -548,7 +548,7 @@ router.post('/add_content', auth(), contentValidator.contentAddValidator, conten
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error. There was an issue initializing the content.
  *         content:
@@ -612,7 +612,7 @@ router.post('/init_content', auth(), contentValidator.contentInitValidator, cont
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "update content successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -644,7 +644,7 @@ router.post('/init_content', auth(), contentValidator.contentInitValidator, cont
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -699,11 +699,10 @@ router.post('/update_content', auth(), contentValidator.contentUpdateValidator, 
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "success"
+ *                       example: "Content deleted successfully"
  *                     data:
- *                       type: integer
- *                       description: effected id
- *                       example: 1
+ *                       type: object
+ *                       example: {}
  *       '400':
  *         description: Bad request
  *         content:
@@ -729,7 +728,7 @@ router.post('/update_content', auth(), contentValidator.contentUpdateValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -782,8 +781,8 @@ router.post('/delete_content', auth(), contentValidator.contentDeleteValidator, 
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "fetch content type successfully"
@@ -792,7 +791,7 @@ router.post('/delete_content', auth(), contentValidator.contentDeleteValidator, 
  *                   items:
  *                     type: string
  *                     description: Content type identifier.
- *                     example: "TYPE_ONE"
+ *                     example: "RECOVER"
  *       400:
  *         description: Bad request due to invalid parameters such as non-existing society, language code, or region.
  *         content:
@@ -818,7 +817,7 @@ router.post('/delete_content', auth(), contentValidator.contentDeleteValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error occurred while fetching content types.
  *         content:

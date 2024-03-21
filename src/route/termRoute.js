@@ -42,6 +42,19 @@ const termValidator = new TermValidator();
  *                         type: string
  *                         description: Publication date of the version.
  *                         example: "2022-01-01"
+ *       401:
+ *         description: Unauthorized access, token not provided or invalid.
+ *         content:
+ *           application/json:
+ *            schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 401
+ *                 message:
+ *                   type: string
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error, unable to fetch the versions of terms and conditions.
  *         content:
@@ -76,7 +89,7 @@ router.post('/get_all_versions', auth(), termController.getAllVersions);
  *               version:
  *                 type: string
  *                 description: The version identifier of the terms and conditions.
- *                 example: "v1.0"
+ *                 example: "1.0"
  *     responses:
  *       200:
  *         description: Terms and conditions for the specified version fetched successfully.
@@ -112,7 +125,7 @@ router.post('/get_all_versions', auth(), termController.getAllVersions);
  *         description: Unauthorized access, token not provided or invalid.
  *         content:
  *           application/json:
-*             schema:
+ *            schema:
  *               type: object
  *               properties:
  *                 code:
@@ -120,12 +133,12 @@ router.post('/get_all_versions', auth(), termController.getAllVersions);
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while fetching the terms for the specified version.
  *         content:
  *           application/json:
-*             schema:
+ *            schema:
  *               type: object
  *               properties:
  *                 code:
@@ -157,7 +170,7 @@ router.post('/get_term_by_version', auth(), termValidator.getTermByVersionValida
  *               version:
  *                 type: string
  *                 description: The version identifier for the new terms and conditions.
- *                 example: "v2.0"
+ *                 example: "2.0"
  *               term:
  *                 type: string
  *                 description: Full text of the terms and conditions.
@@ -186,9 +199,6 @@ router.post('/get_term_by_version', auth(), termValidator.getTermByVersionValida
  *                 message:
  *                   type: string
  *                   example: "Missing required fields"
- *                 status:
- *                   type: boolean
- *                   example: false
  *       401:
  *         description: Unauthorized access, token not provided or invalid.
  *         content:
@@ -201,7 +211,7 @@ router.post('/get_term_by_version', auth(), termValidator.getTermByVersionValida
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while publishing the term.
  *         content:

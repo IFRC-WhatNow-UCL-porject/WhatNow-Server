@@ -168,7 +168,7 @@ var societyCode =  [
     ["UG", "Uganda Society"],   
     ["UA", "Ukraine Society"],   
     ["AE", "United Arab Emirates Society"],   
-    ["GB", "United Kiongdom Society"],   
+    ["GB", "United Kingdom Society"],   
     ["US", "United States of America Society"],   
     ["UY", "Uruguay Society"],   
     ["UZ", "Uzbekistan Society"],   

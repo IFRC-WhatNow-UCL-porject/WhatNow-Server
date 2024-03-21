@@ -49,7 +49,7 @@ const userRoleController = new UserRoleController();
  *               properties:
  *                 status:
  *                   type: boolean
- *                   example: false
+ *                   example: true
  *                 code:
  *                   type: integer
  *                   example: 200
@@ -61,35 +61,6 @@ const userRoleController = new UserRoleController();
  *                   description: Usually empty({}) since password will not be returned and email is known
  *                   example: {}
  *       '400':
- *         description: Confirm password not matched
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: boolean
- *                   example: false
- *                 code:
- *                   type: integer
- *                   example: 400
- *                 message:
- *                   type: string
- *                   example: Confirm password not matched
- *       '401':
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: integer
- *                   example: 401
- *                 message:
- *                   type: string
- *                   example: "Unauthorized"
- *       '404':
  *         description: User Not found!
  *         content:
  *           application/json:
@@ -105,6 +76,19 @@ const userRoleController = new UserRoleController();
  *                 message:
  *                   type: string
  *                   example: User Not found!
+ *       '401':
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 401
+ *                 message:
+ *                   type: string
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -154,8 +138,8 @@ router.post(
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "User Profile"
@@ -212,7 +196,7 @@ router.post(
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error, unable to retrieve user profile.
  *         content:
@@ -280,8 +264,8 @@ router.post(
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "Profile updated Successfully!"
@@ -310,7 +294,7 @@ router.post(
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error, profile update failed.
  *         content:
@@ -415,7 +399,7 @@ router.post(
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error, unable to fetch user societies.
  *         content:
@@ -447,18 +431,10 @@ router.post('/get_user_societies', auth(), societyValidator.getUserSocietiesVali
  *           schema:
  *             type: object
  *             properties:
- *               uuid:
- *                 type: string
- *                 description: Unique identifier of the user for whom the role is being checked.
- *                 example: "user-uuid-1234"
  *               user_id:
  *                 type: string
  *                 description: ID of the user to check role for.
  *                 example: "user-uuid-1234"
- *               role_id:
- *                 type: string
- *                 description: Expected role ID of the user. 
- *                 example: "role-uuid-5678"
  *     responses:
  *       200:
  *         description: User role retrieved successfully.
@@ -468,8 +444,8 @@ router.post('/get_user_societies', auth(), societyValidator.getUserSocietiesVali
  *               type: object
  *               properties:
  *                 status:
- *                   type: string
- *                   example: "OK"
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
  *                   example: "user role checked"
@@ -505,7 +481,7 @@ router.post('/get_user_societies', auth(), societyValidator.getUserSocietiesVali
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error, unable to fetch user societies.
  *         content:

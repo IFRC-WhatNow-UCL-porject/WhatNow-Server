@@ -58,7 +58,7 @@ const messageValidator = new MessageValidator();
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "Messages"
+ *                       example: "fetch messages successfully"
  *                     data:
  *                       type: array
  *                       items:
@@ -99,7 +99,7 @@ const messageValidator = new MessageValidator();
  *                   example: 400
  *                 message:
  *                   type: string
- *                   example: "society_id is required"
+ *                   example: "\"society_id\" is required"
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -112,7 +112,7 @@ const messageValidator = new MessageValidator();
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -184,7 +184,7 @@ router.post('/get_content_message', auth(), messageValidator.messageGetValidator
  *                       example: 200
  *                     message:
  *                       type: string
- *                       example: "Message Updated"
+ *                       example: "Update content message successful"
  *                     data:
  *                       type: integer
  *                       description: effected id
@@ -201,7 +201,7 @@ router.post('/get_content_message', auth(), messageValidator.messageGetValidator
  *                   example: 400
  *                 message:
  *                   type: string
- *                   example: "society_id is required"
+ *                   example: "\"society_id\" is required"
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -214,7 +214,7 @@ router.post('/get_content_message', auth(), messageValidator.messageGetValidator
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
