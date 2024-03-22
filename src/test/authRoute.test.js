@@ -407,6 +407,7 @@ describe('/api/auth', () => {
               token = tokenMatch ? tokenMatch[1] : null;
               console.log('Token:', token);
               expect(token).not.toBeNull();
+                jest.clearAllMocks();   
             });
     });
 

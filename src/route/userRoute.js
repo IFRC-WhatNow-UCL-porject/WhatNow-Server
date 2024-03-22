@@ -12,7 +12,7 @@ const authController = new AuthController();
 
 /**
  * @swagger
- * /user/get_users:
+ * /users/get_users:
  *   post:
  *     summary: Retrieves all users excluding API users
  *     tags: [User]
@@ -24,43 +24,52 @@ const authController = new AuthController();
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   uuid:
- *                     type: string
- *                     description: Unique identifier for the user.
- *                     example: "user-uuid-1234"
- *                   first_name:
- *                     type: string
- *                     description: The user's first name.
- *                     example: "Jane"
- *                   last_name:
- *                     type: string
- *                     description: The user's last name.
- *                     example: "Doe"
- *                   email:
- *                     type: string
- *                     description: The user's email address.
- *                     example: "jane.doe@dev.com"
- *                   status:
- *                     type: integer
- *                     description: The user's account status.
- *                     example: 1
- *                   email_verified:
- *                     type: integer
- *                     description: Indicates if the user's email is verified.
- *                     example: 1
- *                   last_active:
- *                     type: string
- *                     format: date-time
- *                     description: The last active timestamp of the user.
- *                     example: "2024-01-01T12:34:56.789Z"
- *                   terms_version:
- *                     type: string
- *                     description: The terms version the user has agreed to.
- *                     example: "v1.2"
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "All Users fetched successfully."
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       uuid:
+ *                         type: string
+ *                         description: Unique identifier for the user.
+ *                         example: "user-uuid-1234"
+ *                       first_name:
+ *                         type: string
+ *                         description: The user's first name.
+ *                         example: "Jane"
+ *                       last_name:
+ *                         type: string
+ *                         description: The user's last name.
+ *                         example: "Doe"
+ *                       email:
+ *                         type: string
+ *                         description: The user's email address.
+ *                         example: "jane.doe@dev.com"
+ *                       status:
+ *                         type: integer
+ *                         description: The user's account status.
+ *                         example: 1
+ *                       email_verified:
+ *                         type: integer
+ *                         description: Indicates if the user's email is verified.
+ *                         example: 1
+ *                       last_active:
+ *                         type: string
+ *                         format: date-time
+ *                         description: The last active timestamp of the user.
+ *                         example: "2024-01-01T12:34:56.789Z"
+ *                       terms_version:
+ *                         type: string
+ *                         description: The terms version the user has agreed to.
+ *                         example: "v1.2"
  *       401:
  *         description: Unauthorized access, token not provided or invalid.
  *         content:
@@ -73,7 +82,7 @@ const authController = new AuthController();
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Unauthorized access. Please authenticate."
  *       502:
  *         description: Server error while fetching users.
  *         content:
@@ -89,7 +98,7 @@ router.post('/get_users', auth(), userController.getAllUsers);
 
 /**
  * @swagger
- * /user/get_user_role:
+ * /users/get_user_role:
  *   post:
  *     summary: Retrieves a list of all user roles
  *     tags: [User]
@@ -123,15 +132,26 @@ router.post('/get_users', auth(), userController.getAllUsers);
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while fetching the user roles.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 502
+ *                 message:
+ *                   type: string
+ *                   example: "Unable to fetch user roles."
  */
 router.post('/get_user_role', auth(), userController.getUserRole);
 
 /**
  * @swagger
- * /user/get_user_society:
+ * /users/get_user_society:
  *   post:
  *     summary: Retrieves all user-society associations
  *     tags: [User]
@@ -143,18 +163,27 @@ router.post('/get_user_role', auth(), userController.getUserRole);
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   user_id:
- *                     type: string
- *                     description: Unique identifier of the user.
- *                     example: "user123"
- *                   society_id:
- *                     type: string
- *                     description: Unique identifier of the society.
- *                     example: "society456"
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "User Society"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       user_id:
+ *                         type: string
+ *                         description: Unique identifier of the user.
+ *                         example: "user123"
+ *                       society_id:
+ *                         type: string
+ *                         description: Unique identifier of the society.
+ *                         example: "society456"
  *       401:
  *         description: Unauthorized access, token not provided or invalid.
  *         content:
@@ -167,12 +196,12 @@ router.post('/get_user_role', auth(), userController.getUserRole);
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while fetching the user-society associations.
  *         content:
  *           application/json:
-*             schema:
+ *             schema:
  *               type: object
  *               properties:
  *                 code:
@@ -186,7 +215,7 @@ router.post('/get_user_society', auth(), userController.getUserSociety);
 
 /**
  * @swagger
- * /user/send_activation_email:
+ * /users/send_activation_email:
  *   post:
  *     summary: Sends an activation email to the specified user
  *     tags: [User]
@@ -246,7 +275,7 @@ router.post('/get_user_society', auth(), userController.getUserSociety);
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while attempting to send the activation email.
  *         content:
@@ -267,7 +296,7 @@ router.post(
 
 /**
  * @swagger
- * /user/change_status:
+ * /users/change_status:
  *   post:
  *     summary: Updates the status of a specified user
  *     tags: [User]
@@ -315,9 +344,6 @@ router.post(
  *                 message:
  *                   type: string
  *                   example: "User status Update Failed!"
- *                 status:
- *                   type: boolean
- *                   example: false
  *       401:
  *         description: Unauthorized access, token not provided or invalid.
  *         content:
@@ -327,7 +353,7 @@ router.post(
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while attempting to change the user's status.
  *         content:
@@ -348,7 +374,7 @@ router.post(
 
 /**
  * @swagger
- * /user/create_profile:
+ * /users/create_profile:
  *   post:
  *     summary: Creates a new user profile
  *     tags: [User]
@@ -394,7 +420,7 @@ router.post(
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Profile Created Successfully!"
+ *                   example: "Profile Creation Success!"
  *       400:
  *         description: Registration failed, such as due to invalid input.
  *         content:
@@ -414,7 +440,7 @@ router.post(
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       502:
  *         description: Server error while creating the profile.
  *         content:
