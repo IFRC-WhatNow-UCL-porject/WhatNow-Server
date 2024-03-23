@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 const UserDao = require('../dao/UserDao');
 const UserRoleDao = require('../dao/UserRoleDao');
+const UserSocietyDao = require('../dao/UserSocietyDao');
 const UserServices = require('../service/UserService');
 const ApiUserDao = require('../dao/ApiUserDao');
 const TokenDao = require('../dao/TokenDao');
@@ -14,6 +15,7 @@ const apiUserDao = new ApiUserDao();
 const userDao = new UserDao();
 const userRoleDao = new UserRoleDao();
 const tokenDao = new TokenDao();
+const userSocietyDao = new UserSocietyDao();
 let token = null;
 let user_id = null;
 
@@ -43,6 +45,10 @@ describe('/api/auth', () => {
         console.log('user_id:', user_id);
 
         await apiUserDao.deleteByWhere({ uuid: uuid });
+
+        await userSocietyDao.deleteByWhere({ user_id: uuid });
+
+        await userSocietyDao.deleteByWhere({ user_id: user_id });
 
         await userRoleDao.deleteByWhere({ user_id: uuid });
 

@@ -78,7 +78,7 @@ describe('/api/contentMessage', () => {
 
     afterAll(async () => {
         await auditDao.deleteByWhere({user_id: uuid});
-        await messageDao.deleteByWhere({ region_id: regionId});
+        await messageDao.deleteByWhere({ region_id: regionId });
         await tokenDao.deleteByWhere({ token });
         await userSocietyDao.deleteByWhere({ user_id: uuid, society_id: GB_society_id });
         await userRoleDao.deleteByWhere({ user_id: uuid});

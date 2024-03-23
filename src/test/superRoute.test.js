@@ -26,7 +26,7 @@ const { contentTypes, messageTypes } = require('../config/constant');
 const { v4: uuidv4 } = require('uuid');
 
 describe('/api/super', () => {
-    let token, regionId, contentId, auditId, apiUserId, languageId,  languageCode = 'EN', uuid, GB_society_id, message_id, society_id;
+    let token, regionId, regionId2, contentId, auditId, apiUserId, languageId,  languageCode = 'EN', uuid, GB_society_id, message_id, society_id;
     
     beforeAll(async () => {
         uuid = uuidv4();
@@ -83,7 +83,7 @@ describe('/api/super', () => {
             society_id: GB_society_id,
             description: 'A test region description',
             language_code: languageCode,
-            is_published: 1,
+            is_published: true,
         });
 
         message_id = uuidv4();
@@ -110,11 +110,10 @@ describe('/api/super', () => {
     });
 
     afterAll(async () => {
-        await regionDao.deleteByWhere({ region_name: "Test Region" });
         await languageDao.deleteByWhere({ uuid:languageId });
-        await contentDao.deleteByWhere({region_id: regionId});
-        await auditDao.deleteByWhere({user_id: uuid});
-        await messageDao.deleteByWhere({ region_id: regionId});
+        await auditDao.deleteByWhere({ user_id: uuid});
+        await messageDao.deleteByWhere({ region_id: regionId });
+        await regionDao.deleteByWhere({ uuid: regionId });
         await tokenDao.deleteByWhere({ token });
         await tokenDao.deleteByWhere({ user_uuid: uuid });
         await tokenDao.deleteByWhere({ user_uuid: apiUserId });
@@ -443,9 +442,9 @@ describe('/api/super', () => {
             };
             console.log('updateData', updateData);
             const response = await request(app)
-            .post('/api/super/update_content_message')
-            .set('Authorization', `Bearer ${token}`)
-            .send(updateData);
+              .post('/api/super/update_content_message')
+              .set('Authorization', `Bearer ${token}`)
+              .send(updateData);
             console.log('response', response.body);
             expect(response.statusCode).toBe(200);
             expect(response.body.code).toBe(200);
@@ -649,17 +648,17 @@ describe('/api/super', () => {
               .send({
                 region_name: 'Test Region',
                 society_id: GB_society_id,
-                description: 'A test region description',
+                description: 'A test region description 2',
                 language_code: languageCode,
                 is_published: false,
               });
             
             console.log('response.body', response.body);
-            regionId = response.body.data.uuid;
             expect(response.statusCode).toBe(200);
             expect(response.body.code).toBe(200);
             expect(response.body.status).toBe(true);
             expect(response.body.message).toBe("Region created successfully");
+            regionId2 = response.body.data.uuid;
         });
         
         test('returns 400 for invalid input', async () => {
@@ -686,7 +685,7 @@ describe('/api/super', () => {
               .send({
                 region_name: 'Test Region',
                 society_id: GB_society_id,
-                description: 'A test region description',
+                description: 'A test region description 2',
                 language_code: languageCode,
                 is_published: false,
               });
@@ -749,7 +748,7 @@ describe('/api/super', () => {
               .post('/api/super/update_region')
               .set('Authorization', `Bearer ${token}`)
               .send({
-                uuid: regionId,
+                uuid: regionId2,
                 region_name: "Test Updated Region Name",
                 description: "Test Updated Region Description",
               });
@@ -780,7 +779,7 @@ describe('/api/super', () => {
               .post('/api/super/update_region')
               // Not setting Authorization header
               .send({
-                uuid: regionId,
+                uuid: regionId2,
                 region_name: "Test Updated Region Name",
                 description: "Test Updated Region Description",
               });
@@ -796,7 +795,7 @@ describe('/api/super', () => {
               .post('/api/super/delete_region')
               .set('Authorization', `Bearer ${token}`) 
               .send({
-                uuid: regionId,
+                uuid: regionId2,
               });
           
             expect(response.statusCode).toBe(200);
