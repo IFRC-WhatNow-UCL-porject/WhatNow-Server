@@ -43,7 +43,7 @@ describe('/api/publish', () => {
         console.log('token', token);
         
         const role = await userRoleDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             role_id: 5,
         });
         

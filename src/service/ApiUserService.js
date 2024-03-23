@@ -100,7 +100,7 @@ class ApiUserService {
             password: user.password,
         };
         const updateUser = await this.userDao.updateWhere(splitedData.user, { uuid });
-        const updateUserRole = await this.userRoleDao.updateWhere(splitedData.userRole, { uses_id: uuid });
+        const updateUserRole = await this.userRoleDao.updateWhere(splitedData.userRole, { user_id: uuid });
         const updateUserSociety = await this.userSocietyDao.updateWhere(splitedData.userSociety, { user_id: uuid });
         const updateApiUser = await this.apiUserDao.updateWhere(splitedData.apiUser, { uuid });
 

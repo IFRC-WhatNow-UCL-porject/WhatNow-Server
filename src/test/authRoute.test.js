@@ -163,7 +163,7 @@ describe('/api/auth', () => {
         });
     });
 
-    describe('POST /api/auth/check_email_token', () => {
+    describe('POST /check_email_token', () => {
         test('should verify token successfully', async () => {
             console.log('Token:', token);
             const response = await request(app)
@@ -214,7 +214,7 @@ describe('/api/auth', () => {
         });
     });
 
-    describe('POST /auth/check_user_role', () => {
+    describe('POST /check_user_role', () => {
         test('should return the role for a valid user', async () => {
             const user = await userService.getUserByEmail('test@example.com');
            user_id = user.response.data.dataValues.uuid;
@@ -241,7 +241,7 @@ describe('/api/auth', () => {
           });
     });
 
-    describe('POST /auth/check_user_login_info', () => {
+    describe('POST /check_user_login_info', () => {
         test('should allow a user with correct email and password to login successfully', async () => {
             const response = await request(app)
                 .post('/api/auth/check_user_login_info')
@@ -278,7 +278,7 @@ describe('/api/auth', () => {
         });
     });
 
-    describe('POST /auth/check_user_status', () => {
+    describe('POST /check_user_status', () => {
         test('It should respond with 200 for verified token', async () => {
           const response = await request(app)
             .post('/api/auth/check_user_status')
@@ -304,7 +304,7 @@ describe('/api/auth', () => {
     });
 
 
-    describe('/auth/set_user_terms_version', () => {
+    describe('/set_user_terms_version', () => {
         test('should update terms version successfully', async () => {
             const response = await request(app)
                 .post('/api/auth/set_user_terms_version')
@@ -345,7 +345,7 @@ describe('/api/auth', () => {
         });
     });
 
-    describe('POST /auth/oauth_check_email_exist', () => {
+    describe('POST /oauth_check_email_exist', () => {
         test('should return email existence and verification status for verified email', async () => {
             const response = await request(app)
                 .post('/api/auth/oauth_check_email_exist')
@@ -365,7 +365,7 @@ describe('/api/auth', () => {
         });
     });
 
-    describe('POST /api/auth/check_email_exist', () => {
+    describe('POST /check_email_exist', () => {
         test('should return 200 if email is available', async () => {
             const response = await request(app)
                 .post('/api/auth/check_email_exist')
@@ -386,7 +386,7 @@ describe('/api/auth', () => {
         });
     });
 
-    describe('POST /api/auth/send_reset_password_email', () => {
+    describe('POST /send_reset_password_email', () => {
         test('should send a reset password email successfully', async () => {
             const req = {
                 body: { email: 'test@example.com' }

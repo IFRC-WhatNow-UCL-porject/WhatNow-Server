@@ -68,7 +68,7 @@ class SocietyService {
             if (checkSociety_name) {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Society already exist');
             }
-            const checkCountry_code = await this.societyDao.getSocietyByCountryCode(country_code);
+            const checkCountry_code = await this.societyDao.getSocietyByCode(country_code);
             if (checkCountry_code) {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Country code already exist');
             }

@@ -43,12 +43,12 @@ describe('/api/bulkUpload', () => {
         console.log('token', token);
     
         const role = await userRoleDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             role_id: 5,
         });
     
         const society = await userSocietyDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             society_id: GB_society_id,
         });
     

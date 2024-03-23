@@ -36,7 +36,7 @@ class UserRoleService {
             return responseHandler.returnSuccess(httpStatus.OK, 'auth set', userRole);
         } catch (error) {
             logger.error(error);
-            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'set auth error');
+            return responseHandler.returnError(httpStatus.BAD_GATEWAY, 'set auth error');
         }
     }
 

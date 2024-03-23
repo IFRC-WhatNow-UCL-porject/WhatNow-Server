@@ -48,9 +48,6 @@ const userRoleValidator = new UserRoleValidator();
  *           schema:
  *             type: object
  *             properties:
- *               uuid:
- *                 type: string
- *                 required: true
  *               user_id:
  *                 type: string
  *                 required: true
@@ -68,7 +65,7 @@ const userRoleValidator = new UserRoleValidator();
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -125,7 +122,7 @@ const userRoleValidator = new UserRoleValidator();
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -172,7 +169,7 @@ router.post('/set_auth', auth(), userRoleValidator.setAuthValidator, userRoleCon
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -252,7 +249,7 @@ router.post('/set_auth', auth(), userRoleValidator.setAuthValidator, userRoleCon
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -324,7 +321,7 @@ router.post('/get_content', auth(), contentValidator.contentGetValidator, conten
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -399,7 +396,7 @@ router.post('/get_content', auth(), contentValidator.contentGetValidator, conten
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -452,7 +449,7 @@ router.post('/add_content', auth(), contentValidator.contentAddValidator, conten
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -495,7 +492,7 @@ router.post('/add_content', auth(), contentValidator.contentAddValidator, conten
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -539,7 +536,7 @@ router.post('/update_content', auth(), contentValidator.contentUpdateValidator, 
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -580,7 +577,7 @@ router.post('/update_content', auth(), contentValidator.contentUpdateValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -636,7 +633,7 @@ router.post('/delete_content', auth(), contentValidator.contentDeleteValidator, 
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -701,7 +698,7 @@ router.post('/delete_content', auth(), contentValidator.contentDeleteValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -762,7 +759,7 @@ router.post('/get_content_message', auth(), messageValidator.messageGetValidator
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -803,7 +800,7 @@ router.post('/get_content_message', auth(), messageValidator.messageGetValidator
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -850,7 +847,7 @@ router.post('/update_content_message', auth(), messageValidator.messageUpdateVal
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -923,7 +920,7 @@ router.post('/update_content_message', auth(), messageValidator.messageUpdateVal
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -983,7 +980,7 @@ router.post('/get_language', auth(), languageValidator.languageGetValidator, lan
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1054,7 +1051,7 @@ router.post('/get_language', auth(), languageValidator.languageGetValidator, lan
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -1111,7 +1108,7 @@ router.post('/add_language', auth(), languageValidator.languageAddValidator, lan
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1156,7 +1153,7 @@ router.post('/add_language', auth(), languageValidator.languageAddValidator, lan
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -1206,7 +1203,7 @@ router.post('/update_language', auth(), languageValidator.languageUpdateValidato
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1276,7 +1273,7 @@ router.post('/update_language', auth(), languageValidator.languageUpdateValidato
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -1333,7 +1330,7 @@ router.post('/get_region', auth(), regionValidator.regionGetValidator, regionCon
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1402,7 +1399,7 @@ router.post('/get_region', auth(), regionValidator.regionGetValidator, regionCon
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -1456,7 +1453,7 @@ router.post('/add_region', auth(), regionValidator.regionAddValidator, regionCon
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1501,7 +1498,7 @@ router.post('/add_region', auth(), regionValidator.regionAddValidator, regionCon
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -1549,7 +1546,7 @@ router.post('/update_region', auth(), regionValidator.regionUpdateValidator, reg
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1593,7 +1590,7 @@ router.post('/update_region', auth(), regionValidator.regionUpdateValidator, reg
  *                 message:
  *                   type: string
  *                   description: error message
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: unknown error
  *         content:
@@ -1673,7 +1670,7 @@ router.post('/delete_region', auth(), regionValidator.regionDeleteValidator, reg
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -1709,6 +1706,15 @@ router.post('/get_society', auth(), societyController.getAllSocieties);
  *                 type: string
  *                 maxLength: 255
  *                 required: true
+ *               country_code:
+ *                 type: string
+ *                 required: true
+ *               url:
+ *                 type: string
+ *                 required: true
+ *               image_url:
+ *                 type: string
+ *                 required: true
  *     responses:
  *       '200':
  *         description: Society Created
@@ -1723,9 +1729,6 @@ router.post('/get_society', auth(), societyController.getAllSocieties);
  *                 response:
  *                   type: object
  *                   properties:
- *                     status:
- *                       type: boolean
- *                       example: true
  *                     code:
  *                       type: integer
  *                       example: 200
@@ -1777,7 +1780,7 @@ router.post('/get_society', auth(), societyController.getAllSocieties);
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -1813,7 +1816,11 @@ router.post('/add_society', auth(), societyValidator.addSocietyValidator, societ
  *                 type: string
  *                 maxLength: 36
  *                 required: true
- *               society_name:
+ *               url:
+ *                 type: string
+ *                 maxLength: 255
+ *                 required: true
+ *               image_url:
  *                 type: string
  *                 maxLength: 255
  *                 required: true
@@ -1828,7 +1835,7 @@ router.post('/add_society', auth(), societyValidator.addSocietyValidator, societ
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1858,7 +1865,7 @@ router.post('/add_society', auth(), societyValidator.addSocietyValidator, societ
  *                   example: 400
  *                 message:
  *                   type: string
- *                   example: "uuid is required"
+ *                   example: "\"uuid\" is required"
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -1871,7 +1878,7 @@ router.post('/add_society', auth(), societyValidator.addSocietyValidator, societ
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -1917,7 +1924,7 @@ router.post('/update_society', auth(), societyValidator.updateSocietyValidator, 
  *                 statusCode:
  *                   type: integer
  *                   example: 200
- *                 response:
+ *                 body:
  *                   type: object
  *                   properties:
  *                     status:
@@ -1945,7 +1952,7 @@ router.post('/update_society', auth(), societyValidator.updateSocietyValidator, 
  *                   example: 400
  *                 message:
  *                   type: string
- *                   example: "uuid is required"
+ *                   example: "\"uuid\" is required"
  *       '401':
  *         description: Unauthorized
  *         content:
@@ -1958,7 +1965,7 @@ router.post('/update_society', auth(), societyValidator.updateSocietyValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:
@@ -2076,7 +2083,7 @@ router.post('/delete_society', auth(), societyValidator.deleteSocietyValidator, 
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Unauthorized"
+ *                   example: "Please authenticate"
  *       '502':
  *         description: Unknown error
  *         content:

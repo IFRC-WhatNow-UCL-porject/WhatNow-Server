@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "start": "cross-env NODE_ENV=production node src/index.js",
-    "test": "mocha './specs/**/*.spec.js' --watch",
-    "unit_test": "cross-env NODE_ENV=development jest --verbose --silent --detectOpenHandles --coverage --watch"
+    "test": "cross-env NODE_ENV=development jest -i --verbose --silent --detectOpenHandles --coverage --watch"
   },
   "author": "Kazi Naimul Hoque (Aoyan)",
   "license": "MIT",
@@ -56,5 +55,10 @@
     "nodemon": "^2.0.13",
     "prettier": "^2.5.1",
     "sinon": "^12.0.1"
+  },
+  "jest" : {
+    "collectCoverageFrom": [
+      "src/route/*.js"
+    ]
   }
 }

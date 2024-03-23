@@ -14,7 +14,8 @@ const tokenDao = new TokenDao();
 const societyDao = new SocietyDao();
 const { v4: uuidv4 } = require('uuid');
 
-describe('/api/apps', () => {
+
+describe('/api/apiUsers', () => {
     let token;
     let uuid;
     let GB_society_id;
@@ -41,12 +42,12 @@ describe('/api/apps', () => {
         console.log('token', token);
             
         const role = await userRoleDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             role_id: 5,
         });
             
         const society = await userSocietyDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             society_id: GB_society_id,
         });
     });
@@ -58,10 +59,9 @@ describe('/api/apps', () => {
         await userDao.deleteByWhere({uuid: uuid });
     });
 
-    describe('/api/apiUsers', () => {
-        describe('POST /add_api_user', () => {
-            test('registers a new API user successfully', async () => {
-              const newUser = {
+    describe('POST /add_api_user', () => {
+        test('registers a new API user successfully', async () => {
+            const newUser = {
                 email: 'newuser@example.com',
                 password: 'password123456789',
                 first_name: 'John',
@@ -70,139 +70,137 @@ describe('/api/apps', () => {
                 location: 'Some Location',
                 organization: 'Some Organization',
                 industry_type: 'Some Industry'
-              };
+            };
           
-              const response = await request(app)
+            const response = await request(app)
                 .post('/api/apiUsers/add_api_user')
                 .set('Authorization', `Bearer ${token}`)
                 .send(newUser);
-              console.log('response', response.body);
-              expect(response.statusCode).toBe(201);
-              expect(response.body.status).toBe(true);
-              expect(response.body.code).toBe(201);
-              expect(response.body.message).toContain("Successfully Registered the account! Please Verify your email.");
+            console.log('response', response.body);
+            expect(response.statusCode).toBe(201);
+            expect(response.body.status).toBe(true);
+            expect(response.body.code).toBe(201);
+            expect(response.body.message).toContain("Successfully Registered the account! Please Verify your email.");
               
-              apiUserId = response.body.data.uuid;
-            });
+            apiUserId = response.body.data.uuid;
+        });
         
-          test('returns a 400 error when required fields are missing', async () => {
-              const incompleteUser = {
+        test('returns a 400 error when required fields are missing', async () => {
+            const incompleteUser = {
                 first_name: 'John',
                 last_name: 'Doe'
-              };
+            };
             
-              const response = await request(app)
+            const response = await request(app)
                 .post('/api/apiUsers/add_api_user')
                 .set('Authorization', `Bearer ${token}`)
                 .send(incompleteUser);
             
-              expect(response.statusCode).toBe(400);
-              expect(response.body).toHaveProperty('message', expect.stringContaining("required"));
-          });
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toHaveProperty('message', expect.stringContaining("required"));
+        });
           
-          test('returns a 401 error for unauthorized access', async () => {
-              const newUser = {
-                  email: 'newuser@example.com',
-                  password: 'password123456789',
-                  first_name: 'John',
-                  last_name: 'Doe',
-                  society_id: GB_society_id,
-                  location: 'Some Location',
-                  organization: 'Some Organization',
-                  industry_type: 'Some Industry'
-              };
+        test('returns a 401 error for unauthorized access', async () => {
+            const newUser = {
+                email: 'newuser@example.com',
+                password: 'password123456789',
+                first_name: 'John',
+                last_name: 'Doe',
+                society_id: GB_society_id,
+                location: 'Some Location',
+                organization: 'Some Organization',
+                industry_type: 'Some Industry'
+            };
             
-              const response = await request(app)
+            const response = await request(app)
                 .post('/api/apiUsers/add_api_user')
                 .send(newUser); // Missing Authorization header
             
-              expect(response.statusCode).toBe(401);
-              expect(response.body).toHaveProperty('message', 'Please authenticate');
-          });
-      });
+            expect(response.statusCode).toBe(401);
+            expect(response.body).toHaveProperty('message', 'Please authenticate');
+        });
+    });
 
-      describe('POST /get_api_users', () => {
+    describe('POST /get_api_users', () => {
         test('fetches all API users successfully', async () => {
-          const response = await request(app)
-            .post('/api/apiUsers/get_api_users')
-            .set('Authorization', `Bearer ${token}`); 
+            const response = await request(app)
+                .post('/api/apiUsers/get_api_users')
+                .set('Authorization', `Bearer ${token}`); 
 
-          expect(response.statusCode).toBe(200);
-          expect(response.body.status).toBe(true);
-          expect(response.body.message).toBe("API Users found!");
-          expect(Array.isArray(response.body.data)).toBe(true);
-          expect(response.body.data.length).toBeGreaterThan(0);
-          expect(response.body.data[0]).toHaveProperty('id');
-          expect(response.body.data[0]).toHaveProperty('uuid');
-          expect(response.body.data[0]).toHaveProperty('email');
-      });
+            expect(response.statusCode).toBe(200);
+            expect(response.body.status).toBe(true);
+            expect(response.body.message).toBe("API Users found!");
+            expect(Array.isArray(response.body.data)).toBe(true);
+            expect(response.body.data.length).toBeGreaterThan(0);
+            expect(response.body.data[0]).toHaveProperty('id');
+            expect(response.body.data[0]).toHaveProperty('uuid');
+            expect(response.body.data[0]).toHaveProperty('email');
+        });
 
-      test('returns a 401 error for unauthorized access', async () => {
-        const response = await request(app)
-          .post('/api/apiUsers/get_api_users'); // Missing Authorization header
+        test('returns a 401 error for unauthorized access', async () => {
+            const response = await request(app)
+                .post('/api/apiUsers/get_api_users'); 
       
-        expect(response.statusCode).toBe(401);
-        expect(response.body).toHaveProperty('code', 401);
-        expect(response.body).toHaveProperty('message', 'Please authenticate');
-      });
+            expect(response.statusCode).toBe(401);
+            expect(response.body).toHaveProperty('code', 401);
+            expect(response.body).toHaveProperty('message', 'Please authenticate');
+        });
     });
       
-      describe('POST /get_api_user_by_id', () => {
+    describe('POST /get_api_user_by_id', () => {
         test('fetches an API user by ID successfully', async () => {
-          const response = await request(app)
-            .post('/api/apiUsers/get_api_user_by_id')
-            .send({ uuid: apiUserId }) // Use an existing user ID for testing
-            .set('Authorization', `Bearer ${token}`);
-      
-          expect(response.statusCode).toBe(200);
-          expect(response.body).toHaveProperty('code', 200);
-          expect(response.body).toHaveProperty('message', 'API User found!');
-          expect(response.body.data).toHaveProperty('id');
-          expect(response.body.data).toHaveProperty('uuid');
-          expect(response.body.data).toHaveProperty('email');
+            const response = await request(app)
+                .post('/api/apiUsers/get_api_user_by_id')
+                .send({ uuid: apiUserId }) // Use an existing user ID for testing
+                .set('Authorization', `Bearer ${token}`);
+        
+            expect(response.statusCode).toBe(200);
+            expect(response.body).toHaveProperty('code', 200);
+            expect(response.body).toHaveProperty('message', 'API User found!');
+            expect(response.body.data).toHaveProperty('id');
+            expect(response.body.data).toHaveProperty('uuid');
+            expect(response.body.data).toHaveProperty('email');
         });
 
         test('returns a 400 error when the user ID is missing or invalid', async () => {
-          const response = await request(app)
-            .post('/api/apiUsers/get_api_user_by_id')
-            // Missing userId in the request body
-            .send({})
-            .set('Authorization', `Bearer ${token}`);
-        
-          expect(response.statusCode).toBe(400);
-          expect(response.body).toHaveProperty('code', 400);
-          expect(response.body).toHaveProperty('message', '\"uuid\" is required'); 
+            const response = await request(app)
+                .post('/api/apiUsers/get_api_user_by_id')
+                .send({})
+                .set('Authorization', `Bearer ${token}`);
+          
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toHaveProperty('code', 400);
+            expect(response.body).toHaveProperty('message', '\"uuid\" is required'); 
         });
-        
         test('returns a 401 error for unauthorized access', async () => {
           const response = await request(app)
             .post('/api/apiUsers/get_api_user_by_id')
-            .send({ userId: apiUserId }); // Not setting the Authorization header
+            .send({ uuid: apiUserId }); // Not setting the Authorization header
         
           expect(response.statusCode).toBe(401);
           expect(response.body).toHaveProperty('code', 401);
           expect(response.body).toHaveProperty('message', 'Please authenticate');
         });
-      });
+    });
 
-      describe('POST /update_api_user', () => {
+    describe('POST /update_api_user', () => {
         test('updates an API user successfully', async () => {
-          const userToUpdate = {
-            email: "example@domain.com",
-            password: "newpassword123456789",
-            first_name: "Jane",
-            last_name: "Doe",
-            society_id: GB_society_id,
-            location: "New Location",
-            organization: "New Org",
-            industry_type: "New Industry",
-            uuid: apiUserId
+            const userToUpdate = {
+                email: "example@domain.com",
+                password: "newpassword123456789",
+                first_name: "Jane",
+                last_name: "Doe",
+                society_id: GB_society_id,
+                location: "New Location",
+                organization: "New Org",
+                industry_type: "New Industry",
+                uuid: apiUserId
           };
       
           const response = await request(app)
-            .post('/api/apiUsers/update_api_user')
-            .send(userToUpdate)
-            .set('Authorization', `Bearer ${token}`);
+              .post('/api/apiUsers/update_api_user')
+              .send(userToUpdate)
+              .set('Authorization', `Bearer ${token}`);
       
           expect(response.statusCode).toBe(200);
           expect(response.body).toHaveProperty('code', 200);
@@ -210,94 +208,92 @@ describe('/api/apps', () => {
         });
 
         test('returns a 400 error when required fields are missing', async () => {
-          const incompleteData = {
-            uuid: apiUserId,
-            password: "newpassword123456789",
-            first_name: "Jane",
-            last_name: "Doe",
-            society_id: GB_society_id,
-            location: "New Location",
-            organization: "New Org",
-            industry_type: "New Industry",
-          };
-        
-          const response = await request(app)
-            .post('/api/apiUsers/update_api_user')
-            .send(incompleteData)
-            .set('Authorization', `Bearer ${token}`);
-        
-          expect(response.statusCode).toBe(400);
-          expect(response.body).toHaveProperty('code', 400);
-          // Adjust the expected message based on your actual validation messages
-          expect(response.body.message).toContain('\"email\" is required');
+            const incompleteData = {
+                uuid: apiUserId,
+                password: "newpassword123456789",
+                first_name: "Jane",
+                last_name: "Doe",
+                society_id: GB_society_id,
+                location: "New Location",
+                organization: "New Org",
+                industry_type: "New Industry",
+            };
+          
+            const response = await request(app)
+                .post('/api/apiUsers/update_api_user')
+                .send(incompleteData)
+                .set('Authorization', `Bearer ${token}`);
+          
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toHaveProperty('code', 400);
+            expect(response.body.message).toContain('\"email\" is required');
         });
         
         test('returns a 401 error for unauthorized access', async () => {
-          const validUpdateData = {
-            email: "example@domain.com",
-            password: "newpassword123456789",
-            first_name: "Jane",
-            last_name: "Doe",
-            society_id: GB_society_id,
-            location: "New Location",
-            organization: "New Org",
-            industry_type: "New Industry",
-            uuid: apiUserId
-          };
+            const validUpdateData = {
+                email: "example@domain.com",
+                password: "newpassword123456789",
+                first_name: "Jane",
+                last_name: "Doe",
+                society_id: GB_society_id,
+                location: "New Location",
+                organization: "New Org",
+                industry_type: "New Industry",
+                uuid: apiUserId
+            };
         
-          const response = await request(app)
-            .post('/api/apiUsers/update_api_user')
-            .send(validUpdateData); // Not setting the Authorization header
-        
-          expect(response.statusCode).toBe(401);
-          expect(response.body).toHaveProperty('code', 401);
-          expect(response.body).toHaveProperty('message', 'Please authenticate');
+            const response = await request(app)
+                .post('/api/apiUsers/update_api_user')
+                .send(validUpdateData); // Not setting the Authorization header
+          
+            expect(response.statusCode).toBe(401);
+            expect(response.body).toHaveProperty('code', 401);
+            expect(response.body).toHaveProperty('message', 'Please authenticate');
         });
-      });
+    });
 
-      describe('POST /delete_api_user', () => {
+    describe('POST /delete_api_user', () => {
         test('deletes an API user successfully', async () => {
-          const userToDelete = {
-            uuid: apiUserId
-          };
+            const userToDelete = {
+              uuid: apiUserId
+            };
       
-          const response = await request(app)
-            .post('/api/apiUsers/delete_api_user')
-            .send(userToDelete)
-            .set('Authorization', `Bearer ${token}`);
-      
-          expect(response.statusCode).toBe(200);
-          expect(response.body).toHaveProperty('message', 'API User deleted Successfully!');
+            const response = await request(app)
+                .post('/api/apiUsers/delete_api_user')
+                .send(userToDelete)
+                .set('Authorization', `Bearer ${token}`);
+        
+            expect(response.statusCode).toBe(200);
+            expect(response.body).toHaveProperty('message', 'API User deleted Successfully!');
         });
 
         test('returns a 400 error when required fields are missing', async () => {
-          const missingData = {
-            // Omitting required 'uuid' field
-          };
+            const missingData = {
+              // Omitting required 'uuid' field
+            };
         
-          const response = await request(app)
-            .post('/api/apiUsers/delete_api_user')
-            .send(missingData)
-            .set('Authorization', `Bearer ${token}`);
-        
-          expect(response.statusCode).toBe(400);
-          expect(response.body).toHaveProperty('code', 400);
-          expect(response.body.message).toContain('\"uuid\" is required');
+            const response = await request(app)
+                .post('/api/apiUsers/delete_api_user')
+                .send(missingData)
+                .set('Authorization', `Bearer ${token}`);
+          
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toHaveProperty('code', 400);
+            expect(response.body.message).toContain('\"uuid\" is required');
         });
         
         test('returns a 401 error for unauthorized access', async () => {
-          const validData = {
-            uuid: apiUserId
-          };
-        
-          const response = await request(app)
-            .post('/api/apiUsers/delete_api_user')
-            .send(validData); // Not setting the Authorization header
-        
-          expect(response.statusCode).toBe(401);
-          expect(response.body).toHaveProperty('code', 401);
-          expect(response.body).toHaveProperty('message', 'Please authenticate');
+            const validData = {
+                uuid: apiUserId
+            };
+          
+            const response = await request(app)
+                .post('/api/apiUsers/delete_api_user')
+                .send(validData); // Not setting the Authorization header
+          
+            expect(response.statusCode).toBe(401);
+            expect(response.body).toHaveProperty('code', 401);
+            expect(response.body).toHaveProperty('message', 'Please authenticate');
         });
-      });
     });
 });

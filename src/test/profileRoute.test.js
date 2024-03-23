@@ -51,12 +51,12 @@ describe('/api/profile', () => {
         console.log('token', token);
         
         const role = await userRoleDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             role_id: 5,
         });
         
         const society = await userSocietyDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             society_id: GB_society_id,
         });
 
@@ -143,7 +143,7 @@ describe('/api/profile', () => {
         });
     });
 
-    describe("POST get_profile", () => {
+    describe("POST /get_profile", () => {
         test('fetches user profile successfully', async () => {
             const response = await request(app)
               .post('/api/profile/get_profile')

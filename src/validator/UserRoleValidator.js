@@ -6,9 +6,8 @@ class UserRoleValidator {
     async setAuthValidator(req, res, next) {
 
         const schema = Joi.object({
-            uuid: Joi.string().required(),
             user_id: Joi.string().required(),
-            role_id: Joi.string().required(),
+            role_id: Joi.number().required(),
         });
 
         // schema options

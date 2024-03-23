@@ -26,55 +26,54 @@ describe('/api/contentMessage', () => {
 
     beforeAll(async () => {
         uuid = uuidv4();
-            const GB_society = await societyDao.findByWhere({country_code: 'GB'});
-            console.log('GB_society', GB_society);
-            GB_society_id = GB_society[0].dataValues.uuid;
-            const user = await userDao.create({
-                uuid, 
-                first_name: 'Super',
-                last_name: 'User',
-                email: 'superuser@example.com',
-                password: '123456789101112', 
-                status: 1, 
-                email_verified: 1, 
-                last_active: new Date(),
-                terms_version: "v1.0",
-            });
+        const GB_society = await societyDao.findByWhere({country_code: 'GB'});
+        console.log('GB_society', GB_society);
+        GB_society_id = GB_society[0].dataValues.uuid;            
+        const user = await userDao.create({
+            uuid, 
+            first_name: 'Super',
+            last_name: 'User',
+            email: 'superuser@example.com',
+            password: '123456789101112', 
+            status: 1, 
+            email_verified: 1, 
+            last_active: new Date(),
+            terms_version: "v1.0",
+        });
         
-            token = (await tokenService.generateAuthTokens(user, 'access')).token;
-            console.log('token', token);
+        token = (await tokenService.generateAuthTokens(user, 'access')).token;
+        console.log('token', token);
         
-            const role = await userRoleDao.create({
-                user_id: user.uuid,
-                role_id: 5,
-            });
+        const role = await userRoleDao.create({
+            user_id: uuid,
+            role_id: 5,
+        });
         
-            const society = await userSocietyDao.create({
-                user_id: user.uuid,
-                society_id: GB_society_id,
-            });
+        const society = await userSocietyDao.create({
+            user_id: uuid,
+            society_id: GB_society_id,
+        });
         
-            regionId = uuidv4();
-            const region = await regionDao.create({ 
-                uuid: regionId,
-                region_name: 'Test Region',
-                society_id: GB_society_id,
-                description: 'A test region description',
-                language_code: 'EN',
-                is_published: 1,
-            });
+        regionId = uuidv4();
+        const region = await regionDao.create({ 
+            uuid: regionId,
+            region_name: 'Test Region',
+            society_id: GB_society_id,
+            description: 'A test region description',
+            language_code: 'EN',
+            is_published: 1,
+        });
 
-            message_id = uuidv4();
-            const message = await messageDao.create({
-                uuid: message_id,
-                society_id: GB_society_id,
-                region_id: regionId,
-                language_code: languageCode,
-                content_type: contentTypes.AIR,
-                type: messageTypes.IMMEDIATE,
-                content: 'test message',
-            });
-            
+        message_id = uuidv4();
+        const message = await messageDao.create({
+            uuid: message_id,
+            society_id: GB_society_id,
+            region_id: regionId,
+            language_code: languageCode,
+            content_type: contentTypes.AIR,
+            type: messageTypes.IMMEDIATE,
+            content: 'test message',
+        });    
     });
 
     afterAll(async () => {

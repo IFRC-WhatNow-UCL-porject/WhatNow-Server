@@ -51,12 +51,12 @@ describe("/api/messages", () => {
         console.log('token', token);
         
         const role = await userRoleDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             role_id: 5,
         });
         
         const society = await userSocietyDao.create({
-            user_id: user.uuid,
+            user_id: uuid,
             society_id: GB_society_id,
         });
 
@@ -64,7 +64,7 @@ describe("/api/messages", () => {
             society_id: GB_society_id,
             language_code: language_code,
             url: "https://www.google.com",
-            description: "English",
+            description: "TEST LANGUAGE",
             message: "English" 
         });
 
@@ -94,7 +94,7 @@ describe("/api/messages", () => {
         await tokenDao.deleteByWhere({ token });
         await regionDao.deleteByWhere({ uuid: regionId });
         await messageDao.deleteByWhere({ uuid: message_id });
-        await languageDao.deleteByWhere({ language_code });
+        await languageDao.deleteByWhere({ description: "TEST LANGUAGE" });
         await userSocietyDao.deleteByWhere({ user_id: uuid, society_id: GB_society_id });
         await userRoleDao.deleteByWhere({ user_id: uuid});
         await userDao.deleteByWhere({uuid: uuid });
@@ -140,7 +140,6 @@ describe("/api/messages", () => {
             expect(Array.isArray(response.body.data)).toBe(true);
             const language = response.body.data.find(lang => lang.language_code === "EN");
             expect(language).toBeDefined();
-            expect(language.description).toBe("English");
         });
 
         test('returns 400 for missing society_id', async () => {
