@@ -7,6 +7,7 @@ const logger = require('../config/logger');
 const { tokenTypes } = require('../config/tokens');
 const { userConstant } = require('../config/constant');
 const nodemailer = require('nodemailer');
+const {port, dbHost } = require('../config/config');
 
 class AuthController {
     constructor() {
@@ -84,8 +85,9 @@ class AuthController {
                 email.toLowerCase(),
                 password,
             );
-            result.response.message = 'User login info is correct!';
-
+            if (result.statusCode == httpStatus.OK){
+                result.response.message = "User login info is correct!";
+            };
             res.status(result.statusCode).send(result.response);
         } catch (e) {
             logger.error(e);
@@ -129,10 +131,12 @@ class AuthController {
 
     checkUserStatus = async (req, res) => {
         try {
-            const token = req.headers.authorization.split(' ')[1];
+            const token = req.headers.authorization.split(' ')[1]; // “Bearer token”
+            console.log('header', req.headers);
             if (token === 'null') {
                 res.status(httpStatus.BAD_REQUEST).send({ message: 'Token not found' });
             } else {
+                console.log('Token:', token);
                 const result = await this.tokenService.verifyToken(token, tokenTypes.ACCESS);
                 res.status(result.statusCode).send(result.response);
             }
@@ -261,6 +265,7 @@ class AuthController {
                 subject: 'WhatNow? - Reset your password!',
                 text: `Click link to activate: https://whatnow-preparecenter.azurewebsites.net/reset/?tokenPass=${token}`,
             }).then(result => {
+                console.log('Sending email with options:', mailOptions);
                 console.log(`success, id ${result.messageId}`);
                 res.status(httpStatus.OK).send({ status: true, code: httpStatus.OK, message: 'Reset password email sent successfully!' });
             }).catch(error => {
@@ -298,6 +303,7 @@ class AuthController {
         try {
             const result = await this.tokenService.verifyToken(req.body.token, req.body.type);
             const response = result.response;
+            console.log('Response:', response);
             if (!response.status) {
                 res.status(response.code).send(response);
             } else {

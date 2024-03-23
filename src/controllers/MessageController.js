@@ -45,6 +45,7 @@ class MessageController {
             for (let i = 0; i < types.length; i++) {
                 const type = types[i];
                 if (!Object.keys(messageTypes).includes(type)) {
+                    console.log('Message type not exist', type);
                     return res.status(httpStatus.BAD_REQUEST).send({ message: 'Message type not exist' });
                 }
                 const message = messages[type];

@@ -26,15 +26,15 @@ class TokenService {
 
     verifyToken = async (token, type) => {
         try {
-            const payload = await jwt.verify(token, config.jwt.secret, (err, decoded) => {
-                if (err) {
-                    logger.error(err);
-                    return responseHandler.returnError(httpStatus.BAD_REQUEST, err);
-                } else {
-                    return decoded;
-                }
-            });
+            let payload;
+            try {
+                payload = jwt.verify(token, config.jwt.secret);
+            } catch (err) {
+                // logger.error(err);
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'token not found');
+            }
     
+            console.log('payload', payload);
             const tokenDoc = await this.tokenDao.findOne({
                 token,
                 type,
@@ -97,7 +97,6 @@ class TokenService {
     };
 
     getUserIdFromToken = async (token, tokenType) => {
-
         const tokenDoc = await this.tokenDao.findOne({
             token,
             type: tokenType,
