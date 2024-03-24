@@ -128,10 +128,20 @@ Swagger:
 - Fisrt `npm run dev`
 - Then go to `localhost/api_docs`
 
-Unit test
+System test
 
 - if there is no seeder database, uncomment seeder part in app.js to initialize
-- run `npm run unit_test` for unit test
+  ````javascript
+  db.sequelize.sync()
+    .then(() => {
+        console.log('Database connected');
+        seeder();
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+  ````
+- run `npm run test` for test (Unit test, integrity test, security test and property test for each route)
 
 ## Contributing
 
