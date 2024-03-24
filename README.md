@@ -55,13 +55,53 @@ git clone https://github.com/IFRC-WhatNow-UCL-porject/WhatNow-Server.git
 npm install
 ```
 
-3. Start the development server:
+3. Running locally
++ Create `.env` file to add configuration, example:
+```bash
+#Server environment
+NODE_ENV=development
+#Port number
+PORT=5001
+
+# local database configuration
+DB_HOST=your-local-database-host
+DB_USER=your-local-database-user
+DB_PASS=your-local-database-user-password
+DB_NAME=your-local-database-name
+
+# Server database configuration
+PRODUCTION_DB_HOST=your-server-database-host
+PRODUCTION_DB_USER=your-server-database-user
+PRODUCTION_DB_PASS=your-server-database-user-password
+PRODUCTION_DB_NAME=your-server-database-name
+
+
+# JWT secret key
+JWT_SECRET=new-whatnow-secret-key
+# Number of minutes after which an access token expires
+JWT_ACCESS_EXPIRATION_MINUTES=1440
+
+#Log config
+LOG_FOLDER=logs/
+LOG_FILE=%DATE%-app-log.log
+LOG_LEVEL=error
+
+#Email config
+SERVICE=your-email-service (e.g. gmail)
+SMTP_HOST=your-email-host (e.g. smtp.gmail.com)
+SMTP_PORT=your-email-host (e.g. 465)
+SMTP_SECURE=secure-or-not(e.g. true)
+SMTP_USER=your-own-email-address
+SMTP_PASS=your-email-service-pass
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-WhatNow server should now be running on http://localhost:5000.
+WhatNow server should now be running on http://localhost:5001.
 
 # Azure Setup
 
