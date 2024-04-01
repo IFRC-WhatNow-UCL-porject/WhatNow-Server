@@ -199,7 +199,7 @@ router.post('/get_apis', auth(), apiController.getAllApis);
  *                   description: A brief message explaining the error.
  *                   example: "Something went wrong"
  */
-router.post('/get_api_by_id', auth(), apiValidator.getApiByIdValidator, apiController.getApiById);
+router.post('/get_apis_by_user_id', auth(), apiValidator.getApisByUserIdValidator, apiController.getApisByUserId);
 
 /**
  * @swagger
